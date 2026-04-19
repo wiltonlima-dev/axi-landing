@@ -755,7 +755,6 @@ function FAQ() {
 
 /* ─────────────────────────────────────────
    DIAGNÓSTICO / FORM — dark green section
-───────────────────────────────────────── */
 function DiagnosticoSection() {
   const [submitted, setSubmitted] = useState(false);
   const cd = useCountdown();
@@ -765,7 +764,9 @@ function DiagnosticoSection() {
       <section id="diagnostico" style={{ background: C.dark, color: C.text, textAlign: "center" }}>
         <div className="container" style={{ maxWidth: 600 }}>
           <div style={{ fontSize: 56, marginBottom: 24 }}>✅</div>
-          <h2 style={{ fontSize: 36, fontWeight: 900, letterSpacing: "-0.03em", color: C.green, marginBottom: 16 }}>Diagnóstico agendado!</h2>
+          <h2 style={{ fontSize: 36, fontWeight: 900, letterSpacing: "-0.03em", color: C.green, marginBottom: 16 }}>
+            Diagnóstico agendado!
+          </h2>
           <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 17, lineHeight: 1.75 }}>
             Um dos nossos sócios entrará em contato em até 24 horas. Prepare: últimos 3 extratos bancários e seu faturamento médio mensal.
           </p>
@@ -778,15 +779,20 @@ function DiagnosticoSection() {
     <section id="diagnostico" style={{ background: `linear-gradient(160deg, #0A1A10 0%, ${C.dark} 100%)`, color: C.text }}>
       <div className="container">
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "start" }} className="two-col">
+
+          {/* LADO ESQUERDO */}
           <div>
             <span className="tag tag-dark"><Zap size={11} /> Diagnóstico gratuito</span>
+
             <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 20 }}>
               45 minutos que podem<br />
               <span style={{ color: C.green }}>mudar o seu negócio.</span>
             </h2>
+
             <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 16, lineHeight: 1.8, marginBottom: 32 }}>
               Uma conversa direta com um dos nossos sócios. Sem script de venda. Você traz os números, a gente traz os insights — gratuitamente.
             </p>
+
             <div style={{ display: "flex", flexDirection: "column", gap: 16, marginBottom: 36 }}>
               {[
                 "Identificação dos principais pontos de perda financeira",
@@ -800,10 +806,13 @@ function DiagnosticoSection() {
                 </div>
               ))}
             </div>
+
             <div style={{ background: C.redFaint, border: "1px solid rgba(229,62,62,0.2)", borderRadius: 12, padding: "16px 20px", display: "flex", gap: 12, alignItems: "center" }}>
-              <Clock size={16} color="#FC8181" style={{ flexShrink: 0 }} />
+              <Clock size={16} color="#FC8181" />
               <div>
-                <p style={{ fontSize: 11, color: "#FC8181", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" }}>Vagas limitadas</p>
+                <p style={{ fontSize: 11, color: "#FC8181", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                  Vagas limitadas
+                </p>
                 <p style={{ fontSize: 13, color: "rgba(255,255,255,0.45)" }}>
                   Apenas <strong style={{ color: C.text }}>3 vagas</strong> este mês. Encerramento em {cd.d}d {cd.h}h {cd.m}m.
                 </p>
@@ -811,48 +820,89 @@ function DiagnosticoSection() {
             </div>
           </div>
 
+          {/* FORMULÁRIO */}
           <div>
             <div className="card card-dark" style={{ borderRadius: 16, padding: 36, border: `1px solid ${C.border}` }}>
-              <h3 style={{ fontSize: 22, fontWeight: 800, letterSpacing: "-0.03em", marginBottom: 6, color: C.text }}>Agende seu diagnóstico</h3>
-              <p style={{ color: "rgba(255,255,255,0.35)", fontSize: 13, marginBottom: 28 }}>Preenchimento leva menos de 2 minutos.</p>
+              <h3 style={{ fontSize: 22, fontWeight: 800, marginBottom: 6, color: C.text }}>
+                Agende seu diagnóstico
+              </h3>
+              <p style={{ color: "rgba(255,255,255,0.35)", fontSize: 13, marginBottom: 28 }}>
+                Preenchimento leva menos de 2 minutos.
+              </p>
 
-              <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+              <form
+                action="https://formspree.io/f/mlgalgly"
+                method="POST"
+                onSubmit={() => {
+                  setSubmitted(true);
+                  setTimeout(() => {
+                    window.location.href = "https://wa.me/5585992215449";
+                  }, 800);
+                }}
+                style={{ display: "flex", flexDirection: "column", gap: 14 }}
+              >
+
                 {[
-                  { label: "Nome completo *", type: "text", placeholder: "Seu nome" },
-                  { label: "WhatsApp *", type: "tel", placeholder: "(85) 99999-9999" },
-                  { label: "Segmento da empresa *", type: "text", placeholder: "Ex: clínica, construção, varejo..." },
+                  { name: "nome", label: "Nome completo *", type: "text", placeholder: "Seu nome" },
+                  { name: "whatsapp", label: "WhatsApp *", type: "tel", placeholder: "(85) 99999-9999" },
+                  { name: "segmento", label: "Segmento da empresa *", type: "text", placeholder: "Ex: clínica..." },
                 ].map((f, i) => (
                   <div key={i}>
-                    <label style={{ display: "block", fontSize: 11, color: "rgba(255,255,255,0.4)", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 600 }}>{f.label}</label>
-                    <input type={f.type} placeholder={f.placeholder} required className="field" style={{ background: "rgba(255,255,255,0.05)", border: "1.5px solid rgba(255,255,255,0.1)", color: C.text, borderRadius: 10 }} />
+                    <label style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", marginBottom: 6, display: "block" }}>
+                      {f.label}
+                    </label>
+                    <input
+                      name={f.name}
+                      type={f.type}
+                      placeholder={f.placeholder}
+                      required
+                      className="field"
+                      style={{
+                        background: "rgba(255,255,255,0.05)",
+                        border: "1.5px solid rgba(255,255,255,0.1)",
+                        color: C.text,
+                        borderRadius: 10
+                      }}
+                    />
                   </div>
                 ))}
 
                 <div>
-                  <label style={{ display: "block", fontSize: 11, color: "rgba(255,255,255,0.4)", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 600 }}>Faturamento mensal *</label>
-                  <select required className="field" style={{ background: "rgba(255,255,255,0.05)", border: "1.5px solid rgba(255,255,255,0.1)", color: C.text, borderRadius: 10 }}>
-                    <option value="" style={{ background: "#111" }}>Selecione...</option>
-                    <option style={{ background: "#111" }}>Até R$50 mil</option>
-                    <option style={{ background: "#111" }}>R$50k – R$150k</option>
-                    <option style={{ background: "#111" }}>R$150k – R$500k</option>
-                    <option style={{ background: "#111" }}>Acima de R$500k</option>
+                  <label style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", marginBottom: 6, display: "block" }}>
+                    Faturamento mensal *
+                  </label>
+                  <select name="faturamento" required className="field">
+                    <option value="">Selecione...</option>
+                    <option>Até R$50 mil</option>
+                    <option>R$50k – R$150k</option>
+                    <option>R$150k – R$500k</option>
+                    <option>Acima de R$500k</option>
                   </select>
                 </div>
 
                 <div>
-                  <label style={{ display: "block", fontSize: 11, color: "rgba(255,255,255,0.4)", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 600 }}>Principal dor financeira hoje</label>
-                  <textarea placeholder="Descreva brevemente o que mais te preocupa..." rows={3} className="field" style={{ background: "rgba(255,255,255,0.05)", border: "1.5px solid rgba(255,255,255,0.1)", color: C.text, resize: "vertical", borderRadius: 10 }} />
+                  <label style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", marginBottom: 6, display: "block" }}>
+                    Principal dor financeira
+                  </label>
+                  <textarea
+                    name="dor_financeira"
+                    placeholder="Descreva brevemente..."
+                    rows={3}
+                    className="field"
+                  />
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-lg" style={{ justifyContent: "center", marginTop: 4, width: "100%" }}>
-                  Quero meu diagnóstico gratuito <ArrowRight size={18} />
+                <button type="submit" className="btn btn-primary btn-lg" style={{ width: "100%" }}>
+                  Quero meu diagnóstico gratuito
                 </button>
+
                 <p style={{ fontSize: 11, color: "rgba(255,255,255,0.25)", textAlign: "center" }}>
                   Sem spam. Sem compromisso. 100% confidencial.
                 </p>
               </form>
             </div>
           </div>
+
         </div>
       </div>
     </section>
