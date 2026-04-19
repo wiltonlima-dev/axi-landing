@@ -755,6 +755,7 @@ function FAQ() {
 
 /* ─────────────────────────────────────────
    DIAGNÓSTICO / FORM — dark green section
+───────────────────────────────────────── */
 function DiagnosticoSection() {
   const [submitted, setSubmitted] = useState(false);
   const cd = useCountdown();
