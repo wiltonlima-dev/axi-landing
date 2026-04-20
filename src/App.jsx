@@ -40,8 +40,8 @@ const C = {
   whatsapp:   "https://wa.me/5585992215449",
 };
 
-const WA_MSG = encodeURIComponent("Olá! Vim pelo site da AXI Business e gostaria de saber mais sobre os serviços.");
-const WA_DIAG = encodeURIComponent("Olá! Vim pelo site da AXI Business e quero agendar meu diagnóstico financeiro gratuito.");
+const WA_MSG = encodeURIComponent("Olá! Vim pelo site da Axi Business e gostaria de saber mais sobre os serviços.");
+const WA_DIAG = encodeURIComponent("Olá! Vim pelo site da Axi Business e quero agendar meu diagnóstico financeiro gratuito.");
 
 /* ─────────────────────────────────────────
    GLOBAL STYLES
@@ -183,93 +183,34 @@ const styles = `
 
   @media (max-width: 900px) {
     section { padding: 64px 0; }
+    .container { padding: 0 18px; }
     .two-col { grid-template-columns: 1fr !important; gap: 40px !important; }
     .three-col { grid-template-columns: 1fr !important; }
     .hide-mobile { display: none !important; }
-    .btn-lg { padding: 16px 24px; font-size: 15px; }
-    .container { padding: 0 20px; }
+    .btn-lg { padding: 16px 24px; font-size: 15px; width: 100%; justify-content: center; }
 
-    /* Hero: empilha foto abaixo do texto */
-    #hero .two-col > div:last-child { order: -1; }
+    .nav-logo { height: 22px !important; }
 
-    /* Método: remove sticky no mobile */
-    #metodo [style*="position: sticky"] { position: relative !important; top: auto !important; }
-
-    /* Nav: garante logo visível */
-    nav img { height: 28px !important; }
-  }
-
-  @media (max-width: 480px) {
-    section { padding: 48px 0; }
-    .container { padding: 0 16px; }
-
-    /* Botões em coluna no hero */
-    #hero .btn-lg { width: 100%; justify-content: center; }
-    #hero > div > div > div:first-child > div:nth-child(3) {
-      flex-direction: column;
-      gap: 10px;
+    .hero-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+    .hero-copy h1 { font-size: clamp(30px, 10vw, 42px) !important; line-height: 1.1 !important; }
+    .hero-copy p { font-size: 16px !important; line-height: 1.7 !important; }
+    .hero-actions { flex-direction: column; align-items: stretch; margin-bottom: 40px !important; }
+    .hero-stats { gap: 24px !important; }
+    .hero-image { height: 360px !important; }
+    .hero-badge {
+      position: static !important;
+      margin-top: 16px;
+      margin-left: 0 !important;
+      width: 100%;
+      justify-content: center;
     }
 
-    /* Stats do hero em linha compacta */
-    #hero .stat-num { font-size: 28px !important; }
-    #hero > div > div > div:first-child > div:last-child {
-      gap: 20px !important;
-    }
-
-    /* Urgency pill: quebra o texto */
-    #hero > div > div:first-child {
-      font-size: 11px !important;
-      padding: 6px 12px !important;
-      white-space: normal !important;
-      text-align: left;
-    }
-
-    /* Foto hero menor no mobile */
-    #hero img[alt*="sócios"] {
-      height: 260px !important;
-    }
-
-    /* Badge flutuante: reposiciona */
-    #hero [style*="position: absolute"][style*="bottom: 24"] {
-      left: 0 !important;
-      bottom: -16px !important;
-      font-size: 13px;
-    }
-
-    /* Método: tipografia e espaço */
-    #metodo h2 { font-size: 26px !important; }
-    #metodo p  { font-size: 14px !important; }
-    #metodo .card-dark { padding: 20px 16px !important; }
-    #metodo h3 { font-size: 16px !important; }
-
-    /* Formulário: campos full width */
-    .field { font-size: 16px !important; } /* evita zoom no iOS */
-
-    /* Botão único ocupa full width */
-    #diagnostico .btn-primary { width: 100%; justify-content: center; }
-    #diagnostico .btn-outline-dark { width: 100%; justify-content: center; }
-
-    /* Final CTA: botões em coluna */
-    #final-cta { text-align: center; }
-    #final-cta > div > div:last-child {
-      flex-direction: column;
-      align-items: center;
-    }
-    #final-cta .btn { width: 100%; justify-content: center; }
-
-    /* Depoimentos: badge resultado quebra linha */
-    #provas .card-dark > div:last-child {
-      flex-direction: column;
-      align-items: flex-start !important;
-      gap: 10px !important;
-    }
-
-    /* Socios: foto 1:1 */
-    #socios img { height: 180px !important; }
-
-    /* FAQ: padding interno menor */
-    #faq button { padding: 16px 18px !important; }
-    #faq button span:first-child { font-size: 14px !important; }
+    .method-layout { gap: 32px !important; }
+    .method-aside { position: static !important; top: auto !important; }
+    .method-step { padding: 22px 18px 22px 16px !important; }
+    .method-step-row { gap: 12px !important; }
+    .method-step h3 { font-size: 17px !important; line-height: 1.35 !important; }
+    .method-step p { word-break: break-word; }
   }
 `;
 
@@ -323,20 +264,27 @@ const navLinks = [
 
 function Nav() {
   const scrolled = useScrolled(50);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <>
       <style>{`
         .nav-link {
           color: ${scrolled ? C.textDark : "rgba(255,255,255,0.85)"};
-          font-size: 14px; font-weight: 500; text-decoration: none;
-          transition: color 0.2s; padding: 4px 0;
+          font-size: 14px;
+          font-weight: 500;
+          text-decoration: none;
+          transition: color 0.2s;
+          padding: 4px 0;
         }
         .nav-link:hover { color: ${C.green}; }
       `}</style>
+
       <nav style={{
-        position: "fixed", top: 0, left: 0, right: 0, zIndex: 200,
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 200,
         background: scrolled ? "rgba(247,245,240,0.95)" : "transparent",
         backdropFilter: scrolled ? "blur(16px)" : "none",
         borderBottom: scrolled ? `1px solid ${C.borderLight}` : "none",
@@ -344,112 +292,100 @@ function Nav() {
         padding: "16px 0",
         boxShadow: scrolled ? "0 1px 24px rgba(0,0,0,0.07)" : "none",
       }}>
-        <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          {/* LOGO */}
+        <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
           <img
             src={scrolled ? LOGO_LIGHT : LOGO_DARK}
-            alt="AXI Business"
-            style={{ height: 36, objectFit: "contain", transition: "opacity 0.3s" }}
+            alt="Axi Business"
+            className="nav-logo"
+            style={{ height: 22, objectFit: "contain", transition: "opacity 0.3s" }}
           />
 
-          {/* Desktop links */}
           <div className="hide-mobile" style={{ display: "flex", gap: 32, alignItems: "center" }}>
             {navLinks.map((l) => (
               <a key={l.href} href={l.href} className="nav-link">{l.label}</a>
             ))}
           </div>
 
-          {/* CTAs */}
           <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-            <a
-              href={`${C.whatsapp}?text=${WA_MSG}`}
-              target="_blank" rel="noopener noreferrer"
-              className="btn btn-sm hide-mobile"
-              style={{ background: "transparent", color: scrolled ? C.textDark : "#fff", border: `1.5px solid ${scrolled ? C.borderLight : "rgba(255,255,255,0.35)"}`, borderRadius: 8 }}
-            >
-              Falar agora
-            </a>
             <a href="#diagnostico" className="btn btn-primary btn-sm">
               Diagnóstico grátis
             </a>
-            <button
-              className="hide-mobile" style={{ display: "none" }}
-              onClick={() => setMenuOpen(!menuOpen)}
-            >
-              {menuOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
           </div>
         </div>
       </nav>
-
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div style={{
-          position: "fixed", top: 64, left: 0, right: 0, zIndex: 190,
-          background: C.cream, borderBottom: `1px solid ${C.borderLight}`,
-          padding: "20px 24px", display: "flex", flexDirection: "column", gap: 16,
-        }}>
-          {navLinks.map((l) => (
-            <a key={l.href} href={l.href} style={{ color: C.textDark, fontSize: 16, fontWeight: 500, textDecoration: "none" }}
-              onClick={() => setMenuOpen(false)}>
-              {l.label}
-            </a>
-          ))}
-        </div>
-      )}
     </>
   );
 }
 
 /* ─────────────────────────────────────────
    HERO — dark section
-───────────────────────────────────────── */
 function Hero() {
   const cd = useCountdown();
+
   return (
-    <section id="hero" style={{
-      minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center",
-      background: `linear-gradient(160deg, ${C.dark} 0%, #0D1F15 60%, #0A1A10 100%)`,
-      paddingTop: 100, paddingBottom: 80, position: "relative", overflow: "hidden",
-      color: C.text,
-    }}>
-      {/* Glow */}
+    <section
+      id="hero"
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        background: `linear-gradient(160deg, ${C.dark} 0%, #0D1F15 60%, #0A1A10 100%)`,
+        paddingTop: 100,
+        paddingBottom: 80,
+        position: "relative",
+        overflow: "hidden",
+        color: C.text,
+      }}
+    >
       <div style={{ position: "absolute", top: "10%", right: "-5%", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(0,201,123,0.10) 0%, transparent 70%)", pointerEvents: "none" }} />
       <div style={{ position: "absolute", bottom: "5%", left: "-10%", width: 400, height: 400, borderRadius: "50%", background: "radial-gradient(circle, rgba(0,201,123,0.05) 0%, transparent 70%)", pointerEvents: "none" }} />
 
       <div className="container">
-        {/* Urgency pill */}
         <div style={{
-          display: "inline-flex", alignItems: "center", gap: 10,
-          background: C.redFaint, border: "1px solid rgba(229,62,62,0.25)",
-          borderRadius: 100, padding: "8px 18px", marginBottom: 36,
+          display: "inline-flex",
+          alignItems: "center",
+          gap: 10,
+          background: C.redFaint,
+          border: "1px solid rgba(229,62,62,0.25)",
+          borderRadius: 100,
+          padding: "8px 18px",
+          marginBottom: 36,
+          flexWrap: "wrap",
         }}>
           <span className="pulse-dot" style={{ width: 7, height: 7, borderRadius: "50%", background: C.red, display: "inline-block" }} />
           <span style={{ fontSize: 12, color: "#FC8181", fontWeight: 600, letterSpacing: "0.06em" }}>
-            Vagas limitadas — encerram em {cd.d}d {cd.h}h {cd.m}m {cd.s}s
+            Vagas limitadas - encerram em {cd.d}d {cd.h}h {cd.m}m {cd.s}s
           </span>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 440px", gap: 64, alignItems: "center" }} className="two-col">
-          <div>
+        <div className="two-col hero-grid" style={{ display: "grid", gridTemplateColumns: "1fr 440px", gap: 64, alignItems: "center" }}>
+          <div className="hero-copy">
             <h1 style={{ fontSize: "clamp(36px, 5.5vw, 64px)", fontWeight: 900, lineHeight: 1.07, letterSpacing: "-0.035em", marginBottom: 24 }}>
               Seu negócio fatura bem.<br />
               <span style={{ color: C.green }}>Mas o dinheiro some.</span>
             </h1>
-            <p style={{ fontSize: "clamp(16px, 2vw, 19px)", color: "rgba(255,255,255,0.6)", lineHeight: 1.75, marginBottom: 40, maxWidth: 520 }}>
-              A AXI Business transforma empresários que trabalham muito e lucram pouco em donos que têm previsibilidade, caixa e controle real sobre o próprio negócio.
+
+            <p style={{ fontSize: "clamp(16px, 2vw, 19px)", color: "rgba(255,255,255,0.72)", lineHeight: 1.75, marginBottom: 40, maxWidth: 520 }}>
+              A Axi Business transforma empresários que trabalham muito e lucram pouco em donos que têm previsibilidade, caixa e controle real sobre o próprio negócio.
             </p>
-            <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 56 }}>
+
+            <div className="hero-actions" style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 56 }}>
               <a href="#diagnostico" className="btn btn-primary btn-lg">
                 Diagnóstico gratuito <ArrowRight size={18} />
               </a>
-              <a href={`${C.whatsapp}?text=${WA_MSG}`} target="_blank" rel="noopener noreferrer"
-                className="btn btn-outline-dark btn-lg">
+
+              <a
+                href={`${C.whatsapp}?text=${WA_MSG}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline-dark btn-lg"
+              >
                 <Phone size={17} /> Falar agora
               </a>
             </div>
-            {/* Stats */}
-            <div style={{ display: "flex", gap: 40, flexWrap: "wrap", borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 32 }}>
+
+            <div className="hero-stats" style={{ display: "flex", gap: 40, flexWrap: "wrap", borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 32 }}>
               {[
                 { n: "+120", l: "empresas atendidas" },
                 { n: "R$50M+", l: "em caixa gerenciado" },
@@ -463,24 +399,37 @@ function Hero() {
             </div>
           </div>
 
-          {/* Hero photo */}
           <div style={{ position: "relative" }}>
             <img
               src={IMG_JUNTOS}
-              alt="Igor e Wilton — sócios AXI Business"
+              alt="Igor e Wilton - sócios Axi Business"
+              className="hero-image"
               style={{
-                width: "100%", height: 480, objectFit: "cover", objectPosition: "center top",
-                borderRadius: 16, boxShadow: "0 24px 80px rgba(0,0,0,0.4)",
+                width: "100%",
+                height: 480,
+                objectFit: "cover",
+                objectPosition: "center top",
+                borderRadius: 16,
+                boxShadow: "0 24px 80px rgba(0,0,0,0.4)",
                 display: "block",
               }}
             />
-            {/* Floating badge */}
-            <div style={{
-              position: "absolute", bottom: 24, left: -24,
-              background: "#fff", borderRadius: 12, padding: "14px 18px",
-              boxShadow: "0 8px 32px rgba(0,0,0,0.2)",
-              display: "flex", gap: 12, alignItems: "center",
-            }}>
+
+            <div
+              className="hero-badge"
+              style={{
+                position: "absolute",
+                bottom: 24,
+                left: -24,
+                background: "#fff",
+                borderRadius: 12,
+                padding: "14px 18px",
+                boxShadow: "0 8px 32px rgba(0,0,0,0.2)",
+                display: "flex",
+                gap: 12,
+                alignItems: "center",
+              }}
+            >
               <div style={{ width: 40, height: 40, borderRadius: "50%", background: C.greenLight, display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <TrendingUp size={18} color={C.green} />
               </div>
@@ -551,40 +500,54 @@ function DorSection() {
 ───────────────────────────────────────── */
 function MetodoSection() {
   const steps = [
-    { num: "01", title: "Diagnóstico Financeiro", desc: "Mapeamos a situação real do seu negócio em 72 horas. Sem eufemismos — você vai enxergar exatamente onde está perdendo dinheiro.", detail: "Análise de DRE, fluxo de caixa, estrutura de custos e margem real por produto/serviço." },
+    { num: "01", title: "Diagnóstico Financeiro", desc: "Mapeamos a situação real do seu negócio em 72 horas. Sem eufemismos: você vai enxergar exatamente onde está perdendo dinheiro.", detail: "Análise de DRE, fluxo de caixa, estrutura de custos e margem real por produto ou serviço." },
     { num: "02", title: "Arquitetura Financeira", desc: "Redesenhamos toda a estrutura: separação de caixas, pró-labore, reservas estratégicas e previsibilidade de 90 dias.", detail: "Dashboard em tempo real para você tomar decisão com dado, não com instinto." },
-    { num: "03", title: "Execução e BPO", desc: "Você pode delegar o financeiro operacional pra gente. Contas, relatórios, indicadores — tudo executado e entregue.", detail: "Gestão contínua com reuniões mensais de análise estratégica e alertas proativos." },
-    { num: "04", title: "Inteligência de Crescimento", desc: "Com base financeira estruturada, você começa a tomar decisões de expansão com segurança e número na mão.", detail: "Modelagem de cenários, análise de viabilidade e projeções antes de qualquer movimento." },
+    { num: "03", title: "Execução e BPO", desc: "Você pode delegar o financeiro operacional para a gente. Contas, relatórios e indicadores: tudo executado e entregue.", detail: "Gestão contínua com reuniões mensais de análise estratégica e alertas proativos." },
+    { num: "04", title: "Inteligência de Crescimento", desc: "Com a base financeira estruturada, você começa a tomar decisões de expansão com segurança e número na mão.", detail: "Modelagem de cenários, análise de viabilidade e projeções antes de qualquer movimento." },
   ];
 
   return (
     <section id="metodo" style={{ background: C.dark, color: C.text }}>
       <div className="container">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 80, alignItems: "start" }} className="two-col">
-          <div style={{ position: "sticky", top: 120 }}>
-            <span className="tag tag-dark"><Zap size={11} /> Método AXI</span>
+        <div className="two-col method-layout" style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 80, alignItems: "start" }}>
+          <div className="method-aside" style={{ position: "sticky", top: 120 }}>
+            <span className="tag tag-dark"><Zap size={11} /> Método Axi</span>
+
             <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 24 }}>
               Um sistema que transforma<br />
               <span style={{ color: C.green }}>caos em previsibilidade</span>
             </h2>
-            <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 16, lineHeight: 1.8, marginBottom: 32 }}>
-              A maioria dos consultores entrega um relatório e vai embora. A AXI implanta, executa e acompanha — até o número aparecer na conta.
+
+            <p style={{ color: "rgba(255,255,255,0.62)", fontSize: 16, lineHeight: 1.8, marginBottom: 32 }}>
+              A maioria dos consultores entrega um relatório e vai embora. A Axi implanta, executa e acompanha até o número aparecer na conta.
             </p>
+
             <div style={{ background: C.greenFaint, border: `1px solid ${C.border}`, borderRadius: 12, padding: "20px 24px" }}>
               <p style={{ fontSize: 11, color: C.green, fontWeight: 700, marginBottom: 6, letterSpacing: "0.1em", textTransform: "uppercase" }}>Nossa garantia</p>
-              <p style={{ fontSize: 15, color: C.text, lineHeight: 1.65 }}>Se após 90 dias você não tiver visibilidade financeira completa do seu negócio, devolvemos seu investimento integralmente.</p>
+              <p style={{ fontSize: 15, color: C.text, lineHeight: 1.65 }}>
+                Se após 90 dias você não tiver visibilidade financeira completa do seu negócio, devolvemos seu investimento integralmente.
+              </p>
             </div>
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {steps.map((s, i) => (
-              <div key={i} className="card card-dark" style={{ padding: "28px 24px 28px 20px", borderLeft: `3px solid ${C.green}`, borderRadius: "0 12px 12px 0" }}>
-                <div style={{ display: "flex", gap: 16 }}>
-                  <span style={{ fontWeight: 900, fontSize: 12, color: C.green, letterSpacing: "0.1em", flexShrink: 0, marginTop: 3 }}>{s.num}</span>
+              <div key={i} className="card card-dark method-step" style={{ padding: "28px 24px 28px 20px", borderLeft: `3px solid ${C.green}`, borderRadius: "0 12px 12px 0" }}>
+                <div className="method-step-row" style={{ display: "flex", gap: 16 }}>
+                  <span style={{ fontWeight: 900, fontSize: 12, color: C.green, letterSpacing: "0.1em", flexShrink: 0, marginTop: 3 }}>
+                    {s.num}
+                  </span>
+
                   <div>
-                    <h3 style={{ fontSize: 18, fontWeight: 700, letterSpacing: "-0.02em", marginBottom: 10, color: C.text }}>{s.title}</h3>
-                    <p style={{ color: "rgba(255,255,255,0.65)", fontSize: 15, marginBottom: 10, lineHeight: 1.65 }}>{s.desc}</p>
-                    <p style={{ color: "rgba(255,255,255,0.35)", fontSize: 13, lineHeight: 1.6 }}>{s.detail}</p>
+                    <h3 style={{ fontSize: 18, fontWeight: 700, letterSpacing: "-0.02em", marginBottom: 10, color: C.text }}>
+                      {s.title}
+                    </h3>
+                    <p style={{ color: "rgba(255,255,255,0.72)", fontSize: 15, marginBottom: 10, lineHeight: 1.7 }}>
+                      {s.desc}
+                    </p>
+                    <p style={{ color: "rgba(255,255,255,0.42)", fontSize: 13, lineHeight: 1.65 }}>
+                      {s.detail}
+                    </p>
                   </div>
                 </div>
               </div>
