@@ -523,10 +523,10 @@ function MetodoSection() {
           <div className="method-aside" style={{ position: "sticky", top: 120 }}>
             <span className="tag tag-dark"><Zap size={11} /> Método Axi</span>
 
-            <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 24 }}>
-              Um sistema que transforma<br />
-              <span style={{ color: C.green }}>caos em previsibilidade</span>
-            </h2>
+<h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 24, lineHeight: 1.05 }}>
+  Um sistema que transforma<br />
+  <span style={{ color: C.green }}>caos em previsibilidade</span>
+</h2>
 
             <p style={{ color: "rgba(255,255,255,0.62)", fontSize: 16, lineHeight: 1.8, marginBottom: 32 }}>
               A maioria dos consultores entrega um relatório e vai embora. A Axi implanta, executa e acompanha até o número aparecer na conta.
@@ -600,10 +600,10 @@ function ServicosSection() {
       <div className="container">
         <div style={{ textAlign: "center", marginBottom: 64 }}>
           <span className="tag tag-green"><Target size={11} /> Soluções</span>
-          <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", color: C.textDark, marginBottom: 16 }}>
-            Escolha o nível de<br />
-            <span style={{ color: C.green }}>suporte que você precisa</span>
-          </h2>
+<h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", color: C.textDark, marginBottom: 16, lineHeight: 1.05 }}>
+  Escolha o nível de<br />
+  <span style={{ color: C.green }}>suporte que você precisa</span>
+</h2>
           <p style={{ color: C.muted, maxWidth: 480, margin: "0 auto" }}>
             Nosso diagnóstico inicial é sempre gratuito e define qual caminho faz mais sentido para o seu caso.
           </p>
@@ -687,10 +687,10 @@ function ProvaSection() {
       <div className="container">
         <div style={{ textAlign: "center", marginBottom: 64 }}>
           <span className="tag tag-dark"><Star size={11} /> Resultados reais</span>
-          <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 16 }}>
-            Não é promessa.<br />
-            <span style={{ color: C.green }}>É o que acontece na prática.</span>
-          </h2>
+<h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 16, lineHeight: 1.05 }}>
+  Não é promessa.<br />
+  <span style={{ color: C.green }}>É o que acontece na prática.</span>
+</h2>
         </div>
 
         <div className="three-col" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginBottom: 48 }}>
@@ -751,10 +751,10 @@ function SociosSection() {
       <div className="container">
         <div style={{ textAlign: "center", marginBottom: 64 }}>
           <span className="tag tag-green"><Shield size={11} /> Quem está por trás</span>
-          <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", color: C.textDark, marginBottom: 16 }}>
-            Você não contrata uma empresa.<br />
-            <span style={{ color: C.green }}>Contrata pessoas que já viveram seu problema.</span>
-          </h2>
+<h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", color: C.textDark, marginBottom: 16, lineHeight: 1.05 }}>
+  Você não contrata só uma empresa.<br />
+  <span style={{ color: C.green }}>Contrata pessoas que já viveram seu problema.</span>
+</h2>
           <p style={{ color: C.muted, maxWidth: 500, margin: "0 auto" }}>
             Os sócios da Axi já atuaram dentro de empresas com os mesmos problemas que você enfrenta. Não é teoria, é experiência aplicada.
           </p>
@@ -819,10 +819,10 @@ function FAQ() {
       <div className="container" style={{ maxWidth: 760 }}>
         <div style={{ textAlign: "center", marginBottom: 56 }}>
           <span className="tag tag-green"><CheckCircle size={11} /> Dúvidas frequentes</span>
-          <h2 style={{ fontSize: "clamp(26px, 4vw, 40px)", fontWeight: 900, letterSpacing: "-0.03em", color: C.textDark }}>
-            Perguntas que todo empresário<br />
-            <span style={{ color: C.green }}>faz antes de contratar</span>
-          </h2>
+<h2 style={{ fontSize: "clamp(26px, 4vw, 40px)", fontWeight: 900, letterSpacing: "-0.03em", color: C.textDark, lineHeight: 1.05 }}>
+  Perguntas que todo empresário<br />
+  <span style={{ color: C.green }}>faz antes de contratar</span>
+</h2>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           {FAQS.map((f, i) => (
@@ -927,10 +927,10 @@ Principal dor financeira: ${dor || "Não informado"}`;
           <div>
             <span className="tag tag-dark"><Zap size={11} /> Diagnóstico gratuito</span>
 
-            <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 20 }}>
-              45 minutos que podem<br />
-              <span style={{ color: C.green }}>mudar o seu negócio.</span>
-            </h2>
+<h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 20, lineHeight: 1.05 }}>
+  45 minutos que podem<br />
+  <span style={{ color: C.green }}>mudar o seu negócio.</span>
+</h2>
 
             <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 16, lineHeight: 1.8, marginBottom: 32 }}>
               Uma conversa direta com um dos nossos sócios. Sem script de venda. Você traz os números, a gente traz os insights gratuitamente.
@@ -1075,10 +1075,10 @@ function FinalCTA() {
           <span style={{ width: 6, height: 6, borderRadius: "50%", background: C.green, display: "inline-block" }} />
           <span style={{ fontSize: 12, color: C.green, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" }}>Você ainda está aqui. Isso significa algo.</span>
         </div>
-        <h2 style={{ fontSize: "clamp(30px, 5vw, 52px)", fontWeight: 900, letterSpacing: "-0.035em", marginBottom: 20 }}>
-          Todo mês que passa sem estrutura<br />
-          <span style={{ color: C.green }}>é dinheiro que não volta.</span>
-        </h2>
+<h2 style={{ fontSize: "clamp(30px, 5vw, 52px)", fontWeight: 900, letterSpacing: "-0.035em", marginBottom: 20, lineHeight: 1.05 }}>
+  Todo mês que passa sem estrutura<br />
+  <span style={{ color: C.green }}>é dinheiro que não volta.</span>
+</h2>
         <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 17, marginBottom: 40, lineHeight: 1.75 }}>
           A decisão de organizar o financeiro da sua empresa nunca vai ser urgente — até o dia que for tarde demais.
         </p>
