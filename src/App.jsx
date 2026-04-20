@@ -888,6 +888,11 @@ Principal dor financeira: ${dor || "Não informado"}`;
       form.reset();
 
       window.location.href = `https://wa.me/5585992215449?text=${encodeURIComponent(mensagem)}`;
+    } catch (err) {
+      setError("Não conseguimos enviar agora. Tente novamente em instantes ou fale conosco pelo WhatsApp.");
+    } finally {
+      setSending(false);
+    }
   }
 
   if (submitted) {
@@ -958,10 +963,7 @@ Principal dor financeira: ${dor || "Não informado"}`;
                 Preenchimento leva menos de 2 minutos.
               </p>
 
-              <form
-                onSubmit={handleSubmit}
-                style={{ display: "flex", flexDirection: "column", gap: 14 }}
-              >
+              <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
                 <input type="hidden" name="_subject" value="Novo lead - Diagnóstico Axi Business" />
 
                 {[
