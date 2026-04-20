@@ -319,6 +319,7 @@ function Nav() {
 
 /* ─────────────────────────────────────────
    HERO — dark section
+───────────────────────────────────────── */
 function Hero() {
   const cd = useCountdown();
 
