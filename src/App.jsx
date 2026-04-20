@@ -921,9 +921,6 @@ function DiagnosticoSection() {
                 method="POST"
                 onSubmit={() => {
                   setSubmitted(true);
-                  setTimeout(() => {
-                    window.location.href = "https://wa.me/5585992215449";
-                  }, 800);
                 }}
                 style={{ display: "flex", flexDirection: "column", gap: 14 }}
               >
