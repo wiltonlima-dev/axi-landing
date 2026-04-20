@@ -843,7 +843,62 @@ function FAQ() {
 ───────────────────────────────────────── */
 function DiagnosticoSection() {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
   const cd = useCountdown();
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setSending(true);
+    setError("");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const nome = formData.get("nome") || "";
+    const whatsapp = formData.get("whatsapp") || "";
+    const email = formData.get("email") || "";
+    const segmento = formData.get("segmento") || "";
+    const faturamento = formData.get("faturamento") || "";
+    const dor = formData.get("dor_financeira") || "";
+
+    try {
+      const response = await fetch("https://formspree.io/f/mlgalgly", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Falha ao enviar formulário.");
+      }
+
+      const mensagem = `Olá! Vim pelo site da Axi Business e quero agendar meu diagnóstico gratuito.
+
+Nome: ${nome}
+WhatsApp: ${whatsapp}
+E-mail: ${email}
+Segmento: ${segmento}
+Faturamento mensal: ${faturamento}
+Principal dor financeira: ${dor || "Não informado"}`;
+
+      setSubmitted(true);
+      form.reset();
+
+      setTimeout(() => {
+        window.open(
+          `https://wa.me/5585992215449?text=${encodeURIComponent(mensagem)}`,
+          "_blank"
+        );
+      }, 600);
+    } catch (err) {
+      setError("Não conseguimos enviar agora. Tente novamente em instantes ou fale conosco pelo WhatsApp.");
+    } finally {
+      setSending(false);
+    }
+  }
 
   if (submitted) {
     return (
@@ -851,10 +906,10 @@ function DiagnosticoSection() {
         <div className="container" style={{ maxWidth: 600 }}>
           <div style={{ fontSize: 56, marginBottom: 24 }}>✅</div>
           <h2 style={{ fontSize: 36, fontWeight: 900, letterSpacing: "-0.03em", color: C.green, marginBottom: 16 }}>
-            Diagnóstico agendado!
+            Dados enviados com sucesso!
           </h2>
           <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 17, lineHeight: 1.75 }}>
-            Um dos nossos sócios entrará em contato em até 24 horas. Prepare: últimos 3 extratos bancários e seu faturamento médio mensal.
+            Estamos abrindo o WhatsApp com sua mensagem preenchida para agilizar o atendimento.
           </p>
         </div>
       </section>
@@ -865,8 +920,6 @@ function DiagnosticoSection() {
     <section id="diagnostico" style={{ background: `linear-gradient(160deg, #0A1A10 0%, ${C.dark} 100%)`, color: C.text }}>
       <div className="container">
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "start" }} className="two-col">
-
-          {/* LADO ESQUERDO */}
           <div>
             <span className="tag tag-dark"><Zap size={11} /> Diagnóstico gratuito</span>
 
@@ -876,7 +929,7 @@ function DiagnosticoSection() {
             </h2>
 
             <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 16, lineHeight: 1.8, marginBottom: 32 }}>
-              Uma conversa direta com um dos nossos sócios. Sem script de venda. Você traz os números, a gente traz os insights — gratuitamente.
+              Uma conversa direta com um dos nossos sócios. Sem script de venda. Você traz os números, a gente traz os insights gratuitamente.
             </p>
 
             <div style={{ display: "flex", flexDirection: "column", gap: 16, marginBottom: 36 }}>
@@ -906,7 +959,6 @@ function DiagnosticoSection() {
             </div>
           </div>
 
-          {/* FORMULÁRIO */}
           <div>
             <div className="card card-dark" style={{ borderRadius: 16, padding: 36, border: `1px solid ${C.border}` }}>
               <h3 style={{ fontSize: 22, fontWeight: 800, marginBottom: 6, color: C.text }}>
@@ -917,17 +969,15 @@ function DiagnosticoSection() {
               </p>
 
               <form
-                action="https://formspree.io/f/mlgalgly"
-                method="POST"
-                onSubmit={() => {
-                  setSubmitted(true);
-                }}
+                onSubmit={handleSubmit}
                 style={{ display: "flex", flexDirection: "column", gap: 14 }}
               >
+                <input type="hidden" name="_subject" value="Novo lead - Diagnóstico Axi Business" />
 
                 {[
                   { name: "nome", label: "Nome completo *", type: "text", placeholder: "Seu nome" },
                   { name: "whatsapp", label: "WhatsApp *", type: "tel", placeholder: "(85) 99999-9999" },
+                  { name: "email", label: "E-mail *", type: "email", placeholder: "voce@empresa.com" },
                   { name: "segmento", label: "Segmento da empresa *", type: "text", placeholder: "Ex: clínica..." },
                 ].map((f, i) => (
                   <div key={i}>
@@ -954,7 +1004,17 @@ function DiagnosticoSection() {
                   <label style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", marginBottom: 6, display: "block" }}>
                     Faturamento mensal *
                   </label>
-                  <select name="faturamento" required className="field">
+                  <select
+                    name="faturamento"
+                    required
+                    className="field"
+                    style={{
+                      background: "rgba(255,255,255,0.05)",
+                      border: "1.5px solid rgba(255,255,255,0.1)",
+                      color: C.text,
+                      borderRadius: 10
+                    }}
+                  >
                     <option value="">Selecione...</option>
                     <option>Até R$50 mil</option>
                     <option>R$50k – R$150k</option>
@@ -972,12 +1032,24 @@ function DiagnosticoSection() {
                     placeholder="Descreva brevemente..."
                     rows={3}
                     className="field"
+                    style={{
+                      background: "rgba(255,255,255,0.05)",
+                      border: "1.5px solid rgba(255,255,255,0.1)",
+                      color: C.text,
+                      borderRadius: 10
+                    }}
                   />
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-lg" style={{ width: "100%" }}>
-                  Quero meu diagnóstico gratuito
+                <button type="submit" className="btn btn-primary btn-lg" style={{ width: "100%" }} disabled={sending}>
+                  {sending ? "Enviando..." : "Quero meu diagnóstico gratuito"}
                 </button>
+
+                {error && (
+                  <p style={{ fontSize: 12, color: "#FC8181", textAlign: "center" }}>
+                    {error}
+                  </p>
+                )}
 
                 <p style={{ fontSize: 11, color: "rgba(255,255,255,0.25)", textAlign: "center" }}>
                   Sem spam. Sem compromisso. 100% confidencial.
@@ -985,7 +1057,6 @@ function DiagnosticoSection() {
               </form>
             </div>
           </div>
-
         </div>
       </div>
     </section>
