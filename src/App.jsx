@@ -888,6 +888,7 @@ Principal dor financeira: ${dor || "Não informado"}`;
       form.reset();
 
       window.location.href = `https://wa.me/5585992215449?text=${encodeURIComponent(mensagem)}`;
+  }
 
   if (submitted) {
     return (
