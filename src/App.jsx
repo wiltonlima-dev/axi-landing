@@ -887,18 +887,7 @@ Principal dor financeira: ${dor || "Não informado"}`;
       setSubmitted(true);
       form.reset();
 
-      setTimeout(() => {
-        window.open(
-          `https://wa.me/5585992215449?text=${encodeURIComponent(mensagem)}`,
-          "_blank"
-        );
-      }, 600);
-    } catch (err) {
-      setError("Não conseguimos enviar agora. Tente novamente em instantes ou fale conosco pelo WhatsApp.");
-    } finally {
-      setSending(false);
-    }
-  }
+      window.location.href = `https://wa.me/5585992215449?text=${encodeURIComponent(mensagem)}`;
 
   if (submitted) {
     return (
