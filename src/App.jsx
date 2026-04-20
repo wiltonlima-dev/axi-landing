@@ -464,10 +464,19 @@ function DorSection() {
       <div className="container">
         <div style={{ textAlign: "center", marginBottom: 64 }}>
           <span className="tag tag-red"><AlertTriangle size={11} /> O diagnóstico real</span>
-          <h2 style={{ fontSize: "clamp(28px, 4vw, 46px)", fontWeight: 900, letterSpacing: "-0.03em", color: C.textDark, marginBottom: 16 }}>
-            Reconhece algum desses<br />
-            <span style={{ color: C.green }}>sintomas no seu negócio?</span>
-          </h2>
+<h2
+  style={{
+    fontSize: "clamp(28px, 4vw, 46px)",
+    fontWeight: 900,
+    letterSpacing: "-0.03em",
+    color: C.textDark,
+    marginBottom: 16,
+    lineHeight: 1.05,
+  }}
+>
+  Reconhece algum desses<br />
+  <span style={{ color: C.green }}>sintomas no seu negócio?</span>
+</h2>
           <p style={{ color: C.muted, maxWidth: 480, margin: "0 auto", fontSize: 17 }}>
             Se você identificou 2 ou mais, seu negócio tem um problema financeiro que está freando o crescimento.
           </p>
