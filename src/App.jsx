@@ -40,8 +40,8 @@ const C = {
   whatsapp:   "https://wa.me/5585992215449",
 };
 
-const WA_MSG = encodeURIComponent("Olá! Vim pelo site da AXI Business e gostaria de saber mais sobre os serviços.");
-const WA_DIAG = encodeURIComponent("Olá! Vim pelo site da AXI Business e quero agendar meu diagnóstico financeiro gratuito.");
+const WA_MSG = encodeURIComponent("Olá! Vim pelo site da Axi Business e gostaria de saber mais sobre os serviços.");
+const WA_DIAG = encodeURIComponent("Olá! Vim pelo site da Axi Business e quero agendar meu diagnóstico financeiro gratuito.");
 
 /* ─────────────────────────────────────────
    GLOBAL STYLES
@@ -183,10 +183,34 @@ const styles = `
 
   @media (max-width: 900px) {
     section { padding: 64px 0; }
-    .two-col { grid-template-columns: 1fr !important; gap: 48px !important; }
+    .container { padding: 0 18px; }
+    .two-col { grid-template-columns: 1fr !important; gap: 40px !important; }
     .three-col { grid-template-columns: 1fr !important; }
     .hide-mobile { display: none !important; }
-    .btn-lg { padding: 16px 28px; font-size: 15px; }
+    .btn-lg { padding: 16px 24px; font-size: 15px; width: 100%; justify-content: center; }
+
+    .nav-logo { height: 22px !important; }
+
+    .hero-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+    .hero-copy h1 { font-size: clamp(30px, 10vw, 42px) !important; line-height: 1.1 !important; }
+    .hero-copy p { font-size: 16px !important; line-height: 1.7 !important; }
+    .hero-actions { flex-direction: column; align-items: stretch; margin-bottom: 40px !important; }
+    .hero-stats { gap: 24px !important; }
+    .hero-image { height: 360px !important; }
+    .hero-badge {
+      position: static !important;
+      margin-top: 16px;
+      margin-left: 0 !important;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .method-layout { gap: 32px !important; }
+    .method-aside { position: static !important; top: auto !important; }
+    .method-step { padding: 22px 18px 22px 16px !important; }
+    .method-step-row { gap: 12px !important; }
+    .method-step h3 { font-size: 17px !important; line-height: 1.35 !important; }
+    .method-step p { word-break: break-word; }
   }
 `;
 
@@ -240,20 +264,27 @@ const navLinks = [
 
 function Nav() {
   const scrolled = useScrolled(50);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <>
       <style>{`
         .nav-link {
           color: ${scrolled ? C.textDark : "rgba(255,255,255,0.85)"};
-          font-size: 14px; font-weight: 500; text-decoration: none;
-          transition: color 0.2s; padding: 4px 0;
+          font-size: 14px;
+          font-weight: 500;
+          text-decoration: none;
+          transition: color 0.2s;
+          padding: 4px 0;
         }
         .nav-link:hover { color: ${C.green}; }
       `}</style>
+
       <nav style={{
-        position: "fixed", top: 0, left: 0, right: 0, zIndex: 200,
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 200,
         background: scrolled ? "rgba(247,245,240,0.95)" : "transparent",
         backdropFilter: scrolled ? "blur(16px)" : "none",
         borderBottom: scrolled ? `1px solid ${C.borderLight}` : "none",
@@ -261,59 +292,27 @@ function Nav() {
         padding: "16px 0",
         boxShadow: scrolled ? "0 1px 24px rgba(0,0,0,0.07)" : "none",
       }}>
-        <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          {/* LOGO */}
+        <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
           <img
             src={scrolled ? LOGO_LIGHT : LOGO_DARK}
-            alt="AXI Business"
-            style={{ height: 36, objectFit: "contain", transition: "opacity 0.3s" }}
+            alt="Axi Business"
+            className="nav-logo"
+            style={{ height: 22, objectFit: "contain", transition: "opacity 0.3s" }}
           />
 
-          {/* Desktop links */}
           <div className="hide-mobile" style={{ display: "flex", gap: 32, alignItems: "center" }}>
             {navLinks.map((l) => (
               <a key={l.href} href={l.href} className="nav-link">{l.label}</a>
             ))}
           </div>
 
-          {/* CTAs */}
           <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-            <a
-              href={`${C.whatsapp}?text=${WA_MSG}`}
-              target="_blank" rel="noopener noreferrer"
-              className="btn btn-sm hide-mobile"
-              style={{ background: "transparent", color: scrolled ? C.textDark : "#fff", border: `1.5px solid ${scrolled ? C.borderLight : "rgba(255,255,255,0.35)"}`, borderRadius: 8 }}
-            >
-              Falar agora
-            </a>
             <a href="#diagnostico" className="btn btn-primary btn-sm">
               Diagnóstico grátis
             </a>
-            <button
-              className="hide-mobile" style={{ display: "none" }}
-              onClick={() => setMenuOpen(!menuOpen)}
-            >
-              {menuOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
           </div>
         </div>
       </nav>
-
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div style={{
-          position: "fixed", top: 64, left: 0, right: 0, zIndex: 190,
-          background: C.cream, borderBottom: `1px solid ${C.borderLight}`,
-          padding: "20px 24px", display: "flex", flexDirection: "column", gap: 16,
-        }}>
-          {navLinks.map((l) => (
-            <a key={l.href} href={l.href} style={{ color: C.textDark, fontSize: 16, fontWeight: 500, textDecoration: "none" }}
-              onClick={() => setMenuOpen(false)}>
-              {l.label}
-            </a>
-          ))}
-        </div>
-      )}
     </>
   );
 }
@@ -323,50 +322,71 @@ function Nav() {
 ───────────────────────────────────────── */
 function Hero() {
   const cd = useCountdown();
+
   return (
-    <section id="hero" style={{
-      minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center",
-      background: `linear-gradient(160deg, ${C.dark} 0%, #0D1F15 60%, #0A1A10 100%)`,
-      paddingTop: 100, paddingBottom: 80, position: "relative", overflow: "hidden",
-      color: C.text,
-    }}>
-      {/* Glow */}
+    <section
+      id="hero"
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        background: `linear-gradient(160deg, ${C.dark} 0%, #0D1F15 60%, #0A1A10 100%)`,
+        paddingTop: 100,
+        paddingBottom: 80,
+        position: "relative",
+        overflow: "hidden",
+        color: C.text,
+      }}
+    >
       <div style={{ position: "absolute", top: "10%", right: "-5%", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(0,201,123,0.10) 0%, transparent 70%)", pointerEvents: "none" }} />
       <div style={{ position: "absolute", bottom: "5%", left: "-10%", width: 400, height: 400, borderRadius: "50%", background: "radial-gradient(circle, rgba(0,201,123,0.05) 0%, transparent 70%)", pointerEvents: "none" }} />
 
       <div className="container">
-        {/* Urgency pill */}
         <div style={{
-          display: "inline-flex", alignItems: "center", gap: 10,
-          background: C.redFaint, border: "1px solid rgba(229,62,62,0.25)",
-          borderRadius: 100, padding: "8px 18px", marginBottom: 36,
+          display: "inline-flex",
+          alignItems: "center",
+          gap: 10,
+          background: C.redFaint,
+          border: "1px solid rgba(229,62,62,0.25)",
+          borderRadius: 100,
+          padding: "8px 18px",
+          marginBottom: 36,
+          flexWrap: "wrap",
         }}>
           <span className="pulse-dot" style={{ width: 7, height: 7, borderRadius: "50%", background: C.red, display: "inline-block" }} />
           <span style={{ fontSize: 12, color: "#FC8181", fontWeight: 600, letterSpacing: "0.06em" }}>
-            Vagas limitadas — encerram em {cd.d}d {cd.h}h {cd.m}m {cd.s}s
+            Vagas limitadas - encerram em {cd.d}d {cd.h}h {cd.m}m {cd.s}s
           </span>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 440px", gap: 64, alignItems: "center" }} className="two-col">
-          <div>
+        <div className="two-col hero-grid" style={{ display: "grid", gridTemplateColumns: "1fr 440px", gap: 64, alignItems: "center" }}>
+          <div className="hero-copy">
             <h1 style={{ fontSize: "clamp(36px, 5.5vw, 64px)", fontWeight: 900, lineHeight: 1.07, letterSpacing: "-0.035em", marginBottom: 24 }}>
               Seu negócio fatura bem.<br />
               <span style={{ color: C.green }}>Mas o dinheiro some.</span>
             </h1>
-            <p style={{ fontSize: "clamp(16px, 2vw, 19px)", color: "rgba(255,255,255,0.6)", lineHeight: 1.75, marginBottom: 40, maxWidth: 520 }}>
-              A AXI Business transforma empresários que trabalham muito e lucram pouco em donos que têm previsibilidade, caixa e controle real sobre o próprio negócio.
+
+            <p style={{ fontSize: "clamp(16px, 2vw, 19px)", color: "rgba(255,255,255,0.72)", lineHeight: 1.75, marginBottom: 40, maxWidth: 520 }}>
+              A Axi Business transforma empresários que trabalham muito e lucram pouco em donos que têm previsibilidade, caixa e controle real sobre o próprio negócio.
             </p>
-            <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 56 }}>
+
+            <div className="hero-actions" style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 56 }}>
               <a href="#diagnostico" className="btn btn-primary btn-lg">
                 Diagnóstico gratuito <ArrowRight size={18} />
               </a>
-              <a href={`${C.whatsapp}?text=${WA_MSG}`} target="_blank" rel="noopener noreferrer"
-                className="btn btn-outline-dark btn-lg">
+
+              <a
+                href={`${C.whatsapp}?text=${WA_MSG}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-outline-dark btn-lg"
+              >
                 <Phone size={17} /> Falar agora
               </a>
             </div>
-            {/* Stats */}
-            <div style={{ display: "flex", gap: 40, flexWrap: "wrap", borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 32 }}>
+
+            <div className="hero-stats" style={{ display: "flex", gap: 40, flexWrap: "wrap", borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 32 }}>
               {[
                 { n: "+120", l: "empresas atendidas" },
                 { n: "R$50M+", l: "em caixa gerenciado" },
@@ -380,24 +400,37 @@ function Hero() {
             </div>
           </div>
 
-          {/* Hero photo */}
           <div style={{ position: "relative" }}>
             <img
               src={IMG_JUNTOS}
-              alt="Igor e Wilton — sócios AXI Business"
+              alt="Igor e Wilton - sócios Axi Business"
+              className="hero-image"
               style={{
-                width: "100%", height: 480, objectFit: "cover", objectPosition: "center top",
-                borderRadius: 16, boxShadow: "0 24px 80px rgba(0,0,0,0.4)",
+                width: "100%",
+                height: 480,
+                objectFit: "cover",
+                objectPosition: "center top",
+                borderRadius: 16,
+                boxShadow: "0 24px 80px rgba(0,0,0,0.4)",
                 display: "block",
               }}
             />
-            {/* Floating badge */}
-            <div style={{
-              position: "absolute", bottom: 24, left: -24,
-              background: "#fff", borderRadius: 12, padding: "14px 18px",
-              boxShadow: "0 8px 32px rgba(0,0,0,0.2)",
-              display: "flex", gap: 12, alignItems: "center",
-            }}>
+
+            <div
+              className="hero-badge"
+              style={{
+                position: "absolute",
+                bottom: 24,
+                left: -24,
+                background: "#fff",
+                borderRadius: 12,
+                padding: "14px 18px",
+                boxShadow: "0 8px 32px rgba(0,0,0,0.2)",
+                display: "flex",
+                gap: 12,
+                alignItems: "center",
+              }}
+            >
               <div style={{ width: 40, height: 40, borderRadius: "50%", background: C.greenLight, display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <TrendingUp size={18} color={C.green} />
               </div>
@@ -431,10 +464,19 @@ function DorSection() {
       <div className="container">
         <div style={{ textAlign: "center", marginBottom: 64 }}>
           <span className="tag tag-red"><AlertTriangle size={11} /> O diagnóstico real</span>
-          <h2 style={{ fontSize: "clamp(28px, 4vw, 46px)", fontWeight: 900, letterSpacing: "-0.03em", color: C.textDark, marginBottom: 16 }}>
-            Reconhece algum desses<br />
-            <span style={{ color: C.green }}>sintomas no seu negócio?</span>
-          </h2>
+<h2
+  style={{
+    fontSize: "clamp(28px, 4vw, 46px)",
+    fontWeight: 900,
+    letterSpacing: "-0.03em",
+    color: C.textDark,
+    marginBottom: 16,
+    lineHeight: 1.15,
+  }}
+>
+  Reconhece algum desses<br />
+  <span style={{ color: C.green }}>sintomas no seu negócio?</span>
+</h2>
           <p style={{ color: C.muted, maxWidth: 480, margin: "0 auto", fontSize: 17 }}>
             Se você identificou 2 ou mais, seu negócio tem um problema financeiro que está freando o crescimento.
           </p>
@@ -468,40 +510,54 @@ function DorSection() {
 ───────────────────────────────────────── */
 function MetodoSection() {
   const steps = [
-    { num: "01", title: "Diagnóstico Financeiro", desc: "Mapeamos a situação real do seu negócio em 72 horas. Sem eufemismos — você vai enxergar exatamente onde está perdendo dinheiro.", detail: "Análise de DRE, fluxo de caixa, estrutura de custos e margem real por produto/serviço." },
+    { num: "01", title: "Diagnóstico Financeiro", desc: "Mapeamos a situação real do seu negócio em 72 horas. Sem eufemismos: você vai enxergar exatamente onde está perdendo dinheiro.", detail: "Análise de DRE, fluxo de caixa, estrutura de custos e margem real por produto ou serviço." },
     { num: "02", title: "Arquitetura Financeira", desc: "Redesenhamos toda a estrutura: separação de caixas, pró-labore, reservas estratégicas e previsibilidade de 90 dias.", detail: "Dashboard em tempo real para você tomar decisão com dado, não com instinto." },
-    { num: "03", title: "Execução e BPO", desc: "Você pode delegar o financeiro operacional pra gente. Contas, relatórios, indicadores — tudo executado e entregue.", detail: "Gestão contínua com reuniões mensais de análise estratégica e alertas proativos." },
-    { num: "04", title: "Inteligência de Crescimento", desc: "Com base financeira estruturada, você começa a tomar decisões de expansão com segurança e número na mão.", detail: "Modelagem de cenários, análise de viabilidade e projeções antes de qualquer movimento." },
+    { num: "03", title: "Execução e BPO", desc: "Você pode delegar o financeiro operacional para a gente. Contas, relatórios e indicadores: tudo executado e entregue.", detail: "Gestão contínua com reuniões mensais de análise estratégica e alertas proativos." },
+    { num: "04", title: "Inteligência de Crescimento", desc: "Com a base financeira estruturada, você começa a tomar decisões de expansão com segurança e número na mão.", detail: "Modelagem de cenários, análise de viabilidade e projeções antes de qualquer movimento." },
   ];
 
   return (
     <section id="metodo" style={{ background: C.dark, color: C.text }}>
       <div className="container">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 80, alignItems: "start" }} className="two-col">
-          <div style={{ position: "sticky", top: 120 }}>
-            <span className="tag tag-dark"><Zap size={11} /> Método AXI</span>
-            <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 24 }}>
-              Um sistema que transforma<br />
-              <span style={{ color: C.green }}>caos em previsibilidade</span>
-            </h2>
-            <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 16, lineHeight: 1.8, marginBottom: 32 }}>
-              A maioria dos consultores entrega um relatório e vai embora. A AXI implanta, executa e acompanha — até o número aparecer na conta.
+        <div className="two-col method-layout" style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 80, alignItems: "start" }}>
+          <div className="method-aside" style={{ position: "sticky", top: 120 }}>
+            <span className="tag tag-dark"><Zap size={11} /> Método Axi</span>
+
+<h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 24, lineHeight: 1.15 }}>
+  Um sistema que transforma<br />
+  <span style={{ color: C.green }}>caos em previsibilidade</span>
+</h2>
+
+            <p style={{ color: "rgba(255,255,255,0.62)", fontSize: 16, lineHeight: 1.8, marginBottom: 32 }}>
+              A maioria dos consultores entrega um relatório e vai embora. A Axi implanta, executa e acompanha até o número aparecer na conta.
             </p>
+
             <div style={{ background: C.greenFaint, border: `1px solid ${C.border}`, borderRadius: 12, padding: "20px 24px" }}>
               <p style={{ fontSize: 11, color: C.green, fontWeight: 700, marginBottom: 6, letterSpacing: "0.1em", textTransform: "uppercase" }}>Nossa garantia</p>
-              <p style={{ fontSize: 15, color: C.text, lineHeight: 1.65 }}>Se após 90 dias você não tiver visibilidade financeira completa do seu negócio, devolvemos seu investimento integralmente.</p>
+              <p style={{ fontSize: 15, color: C.text, lineHeight: 1.65 }}>
+                Se após 90 dias você não tiver visibilidade financeira completa do seu negócio, devolvemos seu investimento integralmente.
+              </p>
             </div>
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {steps.map((s, i) => (
-              <div key={i} className="card card-dark" style={{ padding: "28px 24px 28px 20px", borderLeft: `3px solid ${C.green}`, borderRadius: "0 12px 12px 0" }}>
-                <div style={{ display: "flex", gap: 16 }}>
-                  <span style={{ fontWeight: 900, fontSize: 12, color: C.green, letterSpacing: "0.1em", flexShrink: 0, marginTop: 3 }}>{s.num}</span>
+              <div key={i} className="card card-dark method-step" style={{ padding: "28px 24px 28px 20px", borderLeft: `3px solid ${C.green}`, borderRadius: "0 12px 12px 0" }}>
+                <div className="method-step-row" style={{ display: "flex", gap: 16 }}>
+                  <span style={{ fontWeight: 900, fontSize: 12, color: C.green, letterSpacing: "0.1em", flexShrink: 0, marginTop: 3 }}>
+                    {s.num}
+                  </span>
+
                   <div>
-                    <h3 style={{ fontSize: 18, fontWeight: 700, letterSpacing: "-0.02em", marginBottom: 10, color: C.text }}>{s.title}</h3>
-                    <p style={{ color: "rgba(255,255,255,0.65)", fontSize: 15, marginBottom: 10, lineHeight: 1.65 }}>{s.desc}</p>
-                    <p style={{ color: "rgba(255,255,255,0.35)", fontSize: 13, lineHeight: 1.6 }}>{s.detail}</p>
+                    <h3 style={{ fontSize: 18, fontWeight: 700, letterSpacing: "-0.02em", marginBottom: 10, color: C.text }}>
+                      {s.title}
+                    </h3>
+                    <p style={{ color: "rgba(255,255,255,0.72)", fontSize: 15, marginBottom: 10, lineHeight: 1.7 }}>
+                      {s.desc}
+                    </p>
+                    <p style={{ color: "rgba(255,255,255,0.42)", fontSize: 13, lineHeight: 1.65 }}>
+                      {s.detail}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -519,16 +575,16 @@ function MetodoSection() {
 function ServicosSection() {
   const services = [
     {
-      icon: <BarChart3 size={22} color={C.green} />,
-      title: "Consultoria Financeira",
-      desc: "Diagnóstico completo + estruturação financeira para empresas que querem clareza e controle. Ideal para quem está pronto para parar de trabalhar no escuro.",
-      ideal: "Empresas faturando R$30k–500k/mês",
-    },
-    {
       icon: <Shield size={22} color={C.green} />,
       title: "BPO Financeiro",
-      desc: "Terceirizamos toda a rotina financeira da sua empresa. Você foca no negócio, nós cuidamos dos números — com precisão e sem surpresas.",
+      desc: "Terceirizamos toda a rotina financeira da sua empresa. Você foca no negócio, nós cuidamos dos números com precisão e sem surpresas.",
       ideal: "Empresas que querem escalar sem contratar CFO",
+    },
+    {
+      icon: <BarChart3 size={22} color={C.green} />,
+      title: "Consultoria Financeira",
+      desc: "Diagnóstico completo mais estruturação financeira para empresas que querem clareza e controle. Ideal para quem está pronto para parar de trabalhar no escuro.",
+      ideal: "Empresas faturando R$30k–500k/mês",
       highlight: true,
     },
     {
@@ -544,46 +600,72 @@ function ServicosSection() {
       <div className="container">
         <div style={{ textAlign: "center", marginBottom: 64 }}>
           <span className="tag tag-green"><Target size={11} /> Soluções</span>
-          <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", color: C.textDark, marginBottom: 16 }}>
-            Escolha o nível de<br />
-            <span style={{ color: C.green }}>suporte que você precisa</span>
-          </h2>
+<h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", color: C.textDark, marginBottom: 16, lineHeight: 1.15 }}>
+  Escolha o nível de<br />
+  <span style={{ color: C.green }}>suporte que você precisa</span>
+</h2>
           <p style={{ color: C.muted, maxWidth: 480, margin: "0 auto" }}>
             Nosso diagnóstico inicial é sempre gratuito e define qual caminho faz mais sentido para o seu caso.
           </p>
         </div>
 
-        <div className="three-col" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
+        <div className="three-col" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginBottom: 32 }}>
           {services.map((s, i) => (
-            <div key={i} className="card card-light" style={{
-              padding: 32, position: "relative",
-              ...(s.highlight ? { border: `2px solid ${C.green}`, boxShadow: `0 8px 32px rgba(0,201,123,0.15)` } : {})
-            }}>
+            <div
+              key={i}
+              className="card card-light"
+              style={{
+                padding: 32,
+                position: "relative",
+                ...(s.highlight ? { border: `2px solid ${C.green}`, boxShadow: `0 8px 32px rgba(0,201,123,0.15)` } : {})
+              }}
+            >
               {s.highlight && (
                 <div style={{
-                  position: "absolute", top: -1, left: 20,
-                  background: C.green, color: "#fff",
-                  fontSize: 10, fontWeight: 800, padding: "4px 12px",
-                  borderRadius: "0 0 8px 8px", letterSpacing: "0.1em", textTransform: "uppercase",
+                  position: "absolute",
+                  top: -1,
+                  left: 20,
+                  background: C.green,
+                  color: "#fff",
+                  fontSize: 10,
+                  fontWeight: 800,
+                  padding: "4px 12px",
+                  borderRadius: "0 0 8px 8px",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
                 }}>
                   Mais popular
                 </div>
               )}
+
               <div style={{ width: 44, height: 44, borderRadius: 10, background: C.greenLight, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20, marginTop: s.highlight ? 20 : 0 }}>
                 {s.icon}
               </div>
-              <h3 style={{ fontSize: 20, fontWeight: 700, color: C.textDark, letterSpacing: "-0.02em", marginBottom: 12 }}>{s.title}</h3>
-              <p style={{ color: C.muted, fontSize: 14, lineHeight: 1.7, marginBottom: 20 }}>{s.desc}</p>
-              <div style={{ borderTop: `1px solid ${C.borderLight}`, paddingTop: 16, marginBottom: 24 }}>
-                <p style={{ fontSize: 11, color: C.greenDark, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 }}>Ideal para</p>
-                <p style={{ fontSize: 13, color: C.textDark }}>{s.ideal}</p>
+
+              <h3 style={{ fontSize: 20, fontWeight: 700, color: C.textDark, letterSpacing: "-0.02em", marginBottom: 12 }}>
+                {s.title}
+              </h3>
+
+              <p style={{ color: C.muted, fontSize: 14, lineHeight: 1.7, marginBottom: 20 }}>
+                {s.desc}
+              </p>
+
+              <div style={{ borderTop: `1px solid ${C.borderLight}`, paddingTop: 16 }}>
+                <p style={{ fontSize: 11, color: C.greenDark, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 }}>
+                  Ideal para
+                </p>
+                <p style={{ fontSize: 13, color: C.textDark }}>
+                  {s.ideal}
+                </p>
               </div>
-              <a href={`${C.whatsapp}?text=${WA_MSG}`} target="_blank" rel="noopener noreferrer"
-                className="btn btn-outline btn-sm" style={{ width: "100%", justifyContent: "center", borderRadius: 8 }}>
-                Quero saber mais <ArrowRight size={14} />
-              </a>
             </div>
           ))}
+        </div>
+
+        <div style={{ textAlign: "center" }}>
+          <a href="#diagnostico" className="btn btn-primary btn-lg">
+            Quero entender qual solução é ideal <ArrowRight size={18} />
+          </a>
         </div>
       </div>
     </section>
@@ -595,7 +677,7 @@ function ServicosSection() {
 ───────────────────────────────────────── */
 function ProvaSection() {
   const depoimentos = [
-    { quote: "Em 60 dias a AXI me mostrou que eu estava pagando R$18 mil por mês em custo invisível. Eliminamos isso e minha margem foi de 8% para 21% sem mudar o faturamento.", name: "Ricardo M.", cargo: "CEO, empresa de tecnologia — Fortaleza", result: "+R$18k de margem liberada" },
+    { quote: "Em 60 dias a Axi me mostrou que eu estava pagando R$18 mil por mês em custo invisível. Eliminamos isso e minha margem foi de 8% para 21% sem mudar o faturamento.", name: "Ricardo M.", cargo: "CEO, empresa de tecnologia — Fortaleza", result: "+R$18k de margem liberada" },
     { quote: "Eu evitava olhar o financeiro porque dava ansiedade. Hoje tenho dashboard diário e sei exatamente o que vai entrar e sair nos próximos 90 dias. Isso muda tudo.", name: "Fernanda L.", cargo: "Sócia, clínica médica — São Paulo", result: "90 dias de previsibilidade" },
     { quote: "Faturava R$200k e não sobrava nada. A AXI identificou que meu modelo de precificação estava errado há anos. Reajustamos e o lucro real apareceu no mesmo trimestre.", name: "Carlos S.", cargo: "Fundador, construtora — Recife", result: "Lucro real no 1º trimestre" },
   ];
@@ -605,10 +687,10 @@ function ProvaSection() {
       <div className="container">
         <div style={{ textAlign: "center", marginBottom: 64 }}>
           <span className="tag tag-dark"><Star size={11} /> Resultados reais</span>
-          <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 16 }}>
-            Não é promessa.<br />
-            <span style={{ color: C.green }}>É o que acontece na prática.</span>
-          </h2>
+<h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 16, lineHeight: 1.15 }}>
+  Não é promessa.<br />
+  <span style={{ color: C.green }}>É o que acontece na prática.</span>
+</h2>
         </div>
 
         <div className="three-col" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginBottom: 48 }}>
@@ -649,16 +731,16 @@ function ProvaSection() {
 function SociosSection() {
   const socios = [
     {
-      name: "Igor",
-      role: "Sócio-fundador",
+      name: "Igor Guilherme",
+      role: "Sócio Financeiro",
       bio: "Especialista em estruturação financeira empresarial, com ampla experiência em diagnóstico de caixa, modelagem de crescimento e implantação de processos financeiros em pequenas e médias empresas.",
       tags: ["Finanças Corporativas", "BPO", "Crescimento"],
       photo: IMG_IGOR,
     },
     {
-      name: "Wilton",
-      role: "Sócio de Estratégia",
-      bio: "Focado em inteligência de negócios e execução financeira, Wilton lidera a operação de BPO e as análises estratégicas que transformam dados em decisões de alto impacto para os clientes AXI.",
+      name: "Wilton Lima",
+      role: "Sócio Estrategista",
+      bio: "Focado em inteligência de negócios e execução financeira, Wilton lidera a operação de BPO e as análises estratégicas que transformam dados em decisões de alto impacto para os clientes Axi.",
       tags: ["Estratégia", "BPO Financeiro", "Gestão"],
       photo: IMG_WILTON,
     },
@@ -669,12 +751,12 @@ function SociosSection() {
       <div className="container">
         <div style={{ textAlign: "center", marginBottom: 64 }}>
           <span className="tag tag-green"><Shield size={11} /> Quem está por trás</span>
-          <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", color: C.textDark, marginBottom: 16 }}>
-            Você não contrata uma empresa.<br />
-            <span style={{ color: C.green }}>Contrata pessoas que já viveram seu problema.</span>
-          </h2>
+<h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", color: C.textDark, marginBottom: 16, lineHeight: 1.15 }}>
+  Você não contrata só uma empresa.<br />
+  <span style={{ color: C.green }}>Contrata pessoas que já viveram seu problema.</span>
+</h2>
           <p style={{ color: C.muted, maxWidth: 500, margin: "0 auto" }}>
-            Os sócios da AXI já atuaram dentro de empresas com os mesmos problemas que você enfrenta. Não é teoria — é experiência aplicada.
+            Os sócios da Axi já atuaram dentro de empresas com os mesmos problemas que você enfrenta. Não é teoria, é experiência aplicada.
           </p>
         </div>
 
@@ -685,17 +767,29 @@ function SociosSection() {
                 src={s.photo}
                 alt={s.name}
                 style={{
-                  width: "100%", height: 240, objectFit: "cover", objectPosition: "center top",
-                  borderRadius: 10, display: "block",
+                  width: "100%",
+                  aspectRatio: "1 / 1",
+                  objectFit: "cover",
+                  objectPosition: "center top",
+                  borderRadius: 10,
+                  display: "block",
                 }}
               />
               <div>
-                <h3 style={{ fontSize: 22, fontWeight: 800, color: C.textDark, letterSpacing: "-0.03em", marginBottom: 4 }}>{s.name}</h3>
-                <p style={{ fontSize: 12, color: C.green, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 14 }}>{s.role}</p>
-                <p style={{ color: C.muted, fontSize: 14, lineHeight: 1.7, marginBottom: 16 }}>{s.bio}</p>
+                <h3 style={{ fontSize: 22, fontWeight: 800, color: C.textDark, letterSpacing: "-0.03em", marginBottom: 4 }}>
+                  {s.name}
+                </h3>
+                <p style={{ fontSize: 12, color: C.green, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 14 }}>
+                  {s.role}
+                </p>
+                <p style={{ color: C.muted, fontSize: 14, lineHeight: 1.7, marginBottom: 16 }}>
+                  {s.bio}
+                </p>
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                   {s.tags.map((t, j) => (
-                    <span key={j} style={{ fontSize: 11, padding: "4px 12px", background: C.greenLight, color: C.greenDark, borderRadius: 100, fontWeight: 600 }}>{t}</span>
+                    <span key={j} style={{ fontSize: 11, padding: "4px 12px", background: C.greenLight, color: C.greenDark, borderRadius: 100, fontWeight: 600 }}>
+                      {t}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -712,7 +806,7 @@ function SociosSection() {
 ───────────────────────────────────────── */
 const FAQS = [
   { q: "Minha empresa é pequena. Faz sentido contratar uma consultoria financeira?", a: "Sim — especialmente por isso. Empresas pequenas perdem proporcionalmente mais dinheiro por falta de estrutura financeira do que as grandes. Um erro de precificação ou uma conta ignorada tem impacto direto na sobrevivência do negócio. Atendemos empresas a partir de R$30k/mês de faturamento." },
-  { q: "Já tenho contador. O que a AXI faz de diferente?", a: "O contador cuida do que passou (fiscal, tributos, obrigações legais). A AXI cuida do que está acontecendo e do que vai acontecer: fluxo de caixa, previsibilidade, margem, decisão estratégica. São funções complementares, não concorrentes." },
+  { q: "Já tenho contador. O que a Axi faz de diferente?", a: "O contador cuida do que passou (fiscal, tributos, obrigações legais). A Axi cuida do que está acontecendo e do que vai acontecer: fluxo de caixa, previsibilidade, margem e decisão estratégica. São funções complementares, não concorrentes." },
   { q: "Quanto tempo leva para ver resultado?", a: "Nossos clientes costumam ter as primeiras percepções em até 30 dias — quando entregamos o diagnóstico completo com os principais pontos de sangria financeira. Mudanças estruturais e aumento de margem costumam aparecer entre 60 e 90 dias de implementação." },
   { q: "Como funciona o diagnóstico gratuito?", a: "É uma reunião de 45 a 60 minutos com um dos nossos sócios. Sem script de venda. Analisamos os números que você trouxer e você sai com pelo menos 3 insights acionáveis — mesmo que não contrate a gente." },
   { q: "E se eu não quiser gerenciar nada disso?", a: "Nosso BPO Financeiro foi feito exatamente para isso. Você delega a operação financeira inteira pra nós. Contas, relatórios, alertas, reuniões mensais — tudo sob nossa responsabilidade. Você só toma a decisão final." },
@@ -725,10 +819,10 @@ function FAQ() {
       <div className="container" style={{ maxWidth: 760 }}>
         <div style={{ textAlign: "center", marginBottom: 56 }}>
           <span className="tag tag-green"><CheckCircle size={11} /> Dúvidas frequentes</span>
-          <h2 style={{ fontSize: "clamp(26px, 4vw, 40px)", fontWeight: 900, letterSpacing: "-0.03em", color: C.textDark }}>
-            Perguntas que todo empresário<br />
-            <span style={{ color: C.green }}>faz antes de contratar</span>
-          </h2>
+<h2 style={{ fontSize: "clamp(26px, 4vw, 40px)", fontWeight: 900, letterSpacing: "-0.03em", color: C.textDark, lineHeight: 1.15 }}>
+  Perguntas que todo empresário<br />
+  <span style={{ color: C.green }}>faz antes de contratar</span>
+</h2>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           {FAQS.map((f, i) => (
@@ -758,7 +852,57 @@ function FAQ() {
 ───────────────────────────────────────── */
 function DiagnosticoSection() {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
   const cd = useCountdown();
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setSending(true);
+    setError("");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const nome = formData.get("nome") || "";
+    const whatsapp = formData.get("whatsapp") || "";
+    const email = formData.get("email") || "";
+    const segmento = formData.get("segmento") || "";
+    const faturamento = formData.get("faturamento") || "";
+    const dor = formData.get("dor_financeira") || "";
+
+    try {
+      const response = await fetch("https://formspree.io/f/mlgalgly", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Falha ao enviar formulário.");
+      }
+
+      const mensagem = `Olá! Vim pelo site da Axi Business e quero agendar meu diagnóstico gratuito.
+
+Nome: ${nome}
+WhatsApp: ${whatsapp}
+E-mail: ${email}
+Segmento: ${segmento}
+Faturamento mensal: ${faturamento}
+Principal dor financeira: ${dor || "Não informado"}`;
+
+      setSubmitted(true);
+      form.reset();
+
+      window.location.href = `https://wa.me/5585992215449?text=${encodeURIComponent(mensagem)}`;
+    } catch (err) {
+      setError("Não conseguimos enviar agora. Tente novamente em instantes ou fale conosco pelo WhatsApp.");
+    } finally {
+      setSending(false);
+    }
+  }
 
   if (submitted) {
     return (
@@ -766,10 +910,10 @@ function DiagnosticoSection() {
         <div className="container" style={{ maxWidth: 600 }}>
           <div style={{ fontSize: 56, marginBottom: 24 }}>✅</div>
           <h2 style={{ fontSize: 36, fontWeight: 900, letterSpacing: "-0.03em", color: C.green, marginBottom: 16 }}>
-            Diagnóstico agendado!
+            Dados enviados com sucesso!
           </h2>
           <p style={{ color: "rgba(255,255,255,0.55)", fontSize: 17, lineHeight: 1.75 }}>
-            Um dos nossos sócios entrará em contato em até 24 horas. Prepare: últimos 3 extratos bancários e seu faturamento médio mensal.
+            Estamos abrindo o WhatsApp com sua mensagem preenchida para agilizar o atendimento.
           </p>
         </div>
       </section>
@@ -780,18 +924,16 @@ function DiagnosticoSection() {
     <section id="diagnostico" style={{ background: `linear-gradient(160deg, #0A1A10 0%, ${C.dark} 100%)`, color: C.text }}>
       <div className="container">
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "start" }} className="two-col">
-
-          {/* LADO ESQUERDO */}
           <div>
             <span className="tag tag-dark"><Zap size={11} /> Diagnóstico gratuito</span>
 
-            <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 20 }}>
-              45 minutos que podem<br />
-              <span style={{ color: C.green }}>mudar o seu negócio.</span>
-            </h2>
+<h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 20, lineHeight: 1.15 }}>
+  45 minutos que podem<br />
+  <span style={{ color: C.green }}>mudar o seu negócio.</span>
+</h2>
 
             <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 16, lineHeight: 1.8, marginBottom: 32 }}>
-              Uma conversa direta com um dos nossos sócios. Sem script de venda. Você traz os números, a gente traz os insights — gratuitamente.
+              Uma conversa direta com um dos nossos sócios. Sem script de venda. Você traz os números, a gente traz os insights gratuitamente.
             </p>
 
             <div style={{ display: "flex", flexDirection: "column", gap: 16, marginBottom: 36 }}>
@@ -821,7 +963,6 @@ function DiagnosticoSection() {
             </div>
           </div>
 
-          {/* FORMULÁRIO */}
           <div>
             <div className="card card-dark" style={{ borderRadius: 16, padding: 36, border: `1px solid ${C.border}` }}>
               <h3 style={{ fontSize: 22, fontWeight: 800, marginBottom: 6, color: C.text }}>
@@ -831,21 +972,13 @@ function DiagnosticoSection() {
                 Preenchimento leva menos de 2 minutos.
               </p>
 
-              <form
-                action="https://formspree.io/f/mlgalgly"
-                method="POST"
-                onSubmit={() => {
-                  setSubmitted(true);
-                  setTimeout(() => {
-                    window.location.href = "https://wa.me/5585992215449";
-                  }, 800);
-                }}
-                style={{ display: "flex", flexDirection: "column", gap: 14 }}
-              >
+              <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                <input type="hidden" name="_subject" value="Novo lead - Diagnóstico Axi Business" />
 
                 {[
                   { name: "nome", label: "Nome completo *", type: "text", placeholder: "Seu nome" },
                   { name: "whatsapp", label: "WhatsApp *", type: "tel", placeholder: "(85) 99999-9999" },
+                  { name: "email", label: "E-mail *", type: "email", placeholder: "voce@empresa.com" },
                   { name: "segmento", label: "Segmento da empresa *", type: "text", placeholder: "Ex: clínica..." },
                 ].map((f, i) => (
                   <div key={i}>
@@ -872,7 +1005,17 @@ function DiagnosticoSection() {
                   <label style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", marginBottom: 6, display: "block" }}>
                     Faturamento mensal *
                   </label>
-                  <select name="faturamento" required className="field">
+                  <select
+                    name="faturamento"
+                    required
+                    className="field"
+                    style={{
+                      background: "rgba(255,255,255,0.05)",
+                      border: "1.5px solid rgba(255,255,255,0.1)",
+                      color: C.text,
+                      borderRadius: 10
+                    }}
+                  >
                     <option value="">Selecione...</option>
                     <option>Até R$50 mil</option>
                     <option>R$50k – R$150k</option>
@@ -890,12 +1033,24 @@ function DiagnosticoSection() {
                     placeholder="Descreva brevemente..."
                     rows={3}
                     className="field"
+                    style={{
+                      background: "rgba(255,255,255,0.05)",
+                      border: "1.5px solid rgba(255,255,255,0.1)",
+                      color: C.text,
+                      borderRadius: 10
+                    }}
                   />
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-lg" style={{ width: "100%" }}>
-                  Quero meu diagnóstico gratuito
+                <button type="submit" className="btn btn-primary btn-lg" style={{ width: "100%" }} disabled={sending}>
+                  {sending ? "Enviando..." : "Quero meu diagnóstico gratuito"}
                 </button>
+
+                {error && (
+                  <p style={{ fontSize: 12, color: "#FC8181", textAlign: "center" }}>
+                    {error}
+                  </p>
+                )}
 
                 <p style={{ fontSize: 11, color: "rgba(255,255,255,0.25)", textAlign: "center" }}>
                   Sem spam. Sem compromisso. 100% confidencial.
@@ -903,7 +1058,6 @@ function DiagnosticoSection() {
               </form>
             </div>
           </div>
-
         </div>
       </div>
     </section>
@@ -921,10 +1075,10 @@ function FinalCTA() {
           <span style={{ width: 6, height: 6, borderRadius: "50%", background: C.green, display: "inline-block" }} />
           <span style={{ fontSize: 12, color: C.green, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" }}>Você ainda está aqui. Isso significa algo.</span>
         </div>
-        <h2 style={{ fontSize: "clamp(30px, 5vw, 52px)", fontWeight: 900, letterSpacing: "-0.035em", marginBottom: 20 }}>
-          Todo mês que passa sem estrutura<br />
-          <span style={{ color: C.green }}>é dinheiro que não volta.</span>
-        </h2>
+<h2 style={{ fontSize: "clamp(30px, 5vw, 52px)", fontWeight: 900, letterSpacing: "-0.035em", marginBottom: 20, lineHeight: 1.15 }}>
+  Todo mês que passa sem estrutura<br />
+  <span style={{ color: C.green }}>é dinheiro que não volta.</span>
+</h2>
         <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 17, marginBottom: 40, lineHeight: 1.75 }}>
           A decisão de organizar o financeiro da sua empresa nunca vai ser urgente — até o dia que for tarde demais.
         </p>
@@ -950,40 +1104,56 @@ function Footer() {
       <div className="container">
         <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", gap: 48, marginBottom: 48 }} className="two-col">
           <div>
-            <img src={LOGO_DARK} alt="AXI Business" style={{ height: 30, marginBottom: 16, objectFit: "contain" }} />
+            <img src={LOGO_DARK} alt="Axi Business" style={{ height: 18, marginBottom: 16, objectFit: "contain" }} />
             <p style={{ color: "rgba(255,255,255,0.35)", fontSize: 14, lineHeight: 1.75, maxWidth: 320 }}>
               Consultoria financeira empresarial para quem quer parar de trabalhar no escuro e começar a crescer com inteligência.
             </p>
           </div>
+
           <div>
-            <p style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 700, marginBottom: 16 }}>Página</p>
+            <p style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 700, marginBottom: 16 }}>
+              Página
+            </p>
             {navLinks.map((l, i) => (
               <div key={i} style={{ marginBottom: 10 }}>
-                <a href={l.href} style={{ color: "rgba(255,255,255,0.4)", fontSize: 14, textDecoration: "none", transition: "color 0.2s" }}
+                <a
+                  href={l.href}
+                  style={{ color: "rgba(255,255,255,0.4)", fontSize: 14, textDecoration: "none", transition: "color 0.2s" }}
                   onMouseEnter={e => e.target.style.color = C.green}
-                  onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.4)"}>
+                  onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.4)"}
+                >
                   {l.label}
                 </a>
               </div>
             ))}
           </div>
+
           <div>
-            <p style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 700, marginBottom: 16 }}>Contato</p>
+            <p style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 700, marginBottom: 16 }}>
+              Contato
+            </p>
             <div style={{ marginBottom: 12, display: "flex", gap: 8, alignItems: "center" }}>
               <Phone size={14} color={C.green} />
-              <a href={`${C.whatsapp}?text=${WA_MSG}`} style={{ color: "rgba(255,255,255,0.4)", fontSize: 14, textDecoration: "none" }}>(85) 99221-5449</a>
+              <a href={`${C.whatsapp}?text=${WA_MSG}`} style={{ color: "rgba(255,255,255,0.4)", fontSize: 14, textDecoration: "none" }}>
+                (85) 99221-5449
+              </a>
             </div>
             <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
               <Mail size={14} color={C.green} />
-              <a href="mailto:contato@axibusiness.com.br" style={{ color: "rgba(255,255,255,0.4)", fontSize: 14, textDecoration: "none" }}>contato@axibusiness.com.br</a>
+              <a href="mailto:contato@axibusiness.com.br" style={{ color: "rgba(255,255,255,0.4)", fontSize: 14, textDecoration: "none" }}>
+                contato@axibusiness.com.br
+              </a>
             </div>
           </div>
         </div>
+
         <div style={{ borderTop: "1px solid rgba(255,255,255,0.05)", paddingTop: 24, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-          <p style={{ color: "rgba(255,255,255,0.2)", fontSize: 13 }}>© 2025 AXI Business. Todos os direitos reservados.</p>
+          <p style={{ color: "rgba(255,255,255,0.2)", fontSize: 13 }}>© 2025 Axi Business. Todos os direitos reservados.</p>
           <div style={{ display: "flex", gap: 20 }}>
             {["Política de Privacidade", "Termos de Uso"].map((l, i) => (
-              <a key={i} href="#" style={{ color: "rgba(255,255,255,0.2)", fontSize: 13, textDecoration: "none" }}>{l}</a>
+              <a key={i} href="#" style={{ color: "rgba(255,255,255,0.2)", fontSize: 13, textDecoration: "none" }}>
+                {l}
+              </a>
             ))}
           </div>
         </div>
