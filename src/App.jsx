@@ -471,7 +471,7 @@ function DorSection() {
     letterSpacing: "-0.03em",
     color: C.textDark,
     marginBottom: 16,
-    lineHeight: 1.05,
+    lineHeight: 1.15,
   }}
 >
   Reconhece algum desses<br />
@@ -523,7 +523,7 @@ function MetodoSection() {
           <div className="method-aside" style={{ position: "sticky", top: 120 }}>
             <span className="tag tag-dark"><Zap size={11} /> Método Axi</span>
 
-<h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 24, lineHeight: 1.05 }}>
+<h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 24, lineHeight: 1.15 }}>
   Um sistema que transforma<br />
   <span style={{ color: C.green }}>caos em previsibilidade</span>
 </h2>
@@ -600,7 +600,7 @@ function ServicosSection() {
       <div className="container">
         <div style={{ textAlign: "center", marginBottom: 64 }}>
           <span className="tag tag-green"><Target size={11} /> Soluções</span>
-<h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", color: C.textDark, marginBottom: 16, lineHeight: 1.05 }}>
+<h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", color: C.textDark, marginBottom: 16, lineHeight: 1.15 }}>
   Escolha o nível de<br />
   <span style={{ color: C.green }}>suporte que você precisa</span>
 </h2>
@@ -687,7 +687,7 @@ function ProvaSection() {
       <div className="container">
         <div style={{ textAlign: "center", marginBottom: 64 }}>
           <span className="tag tag-dark"><Star size={11} /> Resultados reais</span>
-<h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 16, lineHeight: 1.05 }}>
+<h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 16, lineHeight: 1.15 }}>
   Não é promessa.<br />
   <span style={{ color: C.green }}>É o que acontece na prática.</span>
 </h2>
@@ -751,7 +751,7 @@ function SociosSection() {
       <div className="container">
         <div style={{ textAlign: "center", marginBottom: 64 }}>
           <span className="tag tag-green"><Shield size={11} /> Quem está por trás</span>
-<h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", color: C.textDark, marginBottom: 16, lineHeight: 1.05 }}>
+<h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", color: C.textDark, marginBottom: 16, lineHeight: 1.15 }}>
   Você não contrata só uma empresa.<br />
   <span style={{ color: C.green }}>Contrata pessoas que já viveram seu problema.</span>
 </h2>
@@ -819,7 +819,7 @@ function FAQ() {
       <div className="container" style={{ maxWidth: 760 }}>
         <div style={{ textAlign: "center", marginBottom: 56 }}>
           <span className="tag tag-green"><CheckCircle size={11} /> Dúvidas frequentes</span>
-<h2 style={{ fontSize: "clamp(26px, 4vw, 40px)", fontWeight: 900, letterSpacing: "-0.03em", color: C.textDark, lineHeight: 1.05 }}>
+<h2 style={{ fontSize: "clamp(26px, 4vw, 40px)", fontWeight: 900, letterSpacing: "-0.03em", color: C.textDark, lineHeight: 1.15 }}>
   Perguntas que todo empresário<br />
   <span style={{ color: C.green }}>faz antes de contratar</span>
 </h2>
@@ -927,7 +927,7 @@ Principal dor financeira: ${dor || "Não informado"}`;
           <div>
             <span className="tag tag-dark"><Zap size={11} /> Diagnóstico gratuito</span>
 
-<h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 20, lineHeight: 1.05 }}>
+<h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 20, lineHeight: 1.15 }}>
   45 minutos que podem<br />
   <span style={{ color: C.green }}>mudar o seu negócio.</span>
 </h2>
@@ -1075,7 +1075,7 @@ function FinalCTA() {
           <span style={{ width: 6, height: 6, borderRadius: "50%", background: C.green, display: "inline-block" }} />
           <span style={{ fontSize: 12, color: C.green, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" }}>Você ainda está aqui. Isso significa algo.</span>
         </div>
-<h2 style={{ fontSize: "clamp(30px, 5vw, 52px)", fontWeight: 900, letterSpacing: "-0.035em", marginBottom: 20, lineHeight: 1.05 }}>
+<h2 style={{ fontSize: "clamp(30px, 5vw, 52px)", fontWeight: 900, letterSpacing: "-0.035em", marginBottom: 20, lineHeight: 1.15 }}>
   Todo mês que passa sem estrutura<br />
   <span style={{ color: C.green }}>é dinheiro que não volta.</span>
 </h2>
