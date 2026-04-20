@@ -565,16 +565,16 @@ function MetodoSection() {
 function ServicosSection() {
   const services = [
     {
-      icon: <BarChart3 size={22} color={C.green} />,
-      title: "Consultoria Financeira",
-      desc: "Diagnóstico completo + estruturação financeira para empresas que querem clareza e controle. Ideal para quem está pronto para parar de trabalhar no escuro.",
-      ideal: "Empresas faturando R$30k–500k/mês",
-    },
-    {
       icon: <Shield size={22} color={C.green} />,
       title: "BPO Financeiro",
-      desc: "Terceirizamos toda a rotina financeira da sua empresa. Você foca no negócio, nós cuidamos dos números — com precisão e sem surpresas.",
+      desc: "Terceirizamos toda a rotina financeira da sua empresa. Você foca no negócio, nós cuidamos dos números com precisão e sem surpresas.",
       ideal: "Empresas que querem escalar sem contratar CFO",
+    },
+    {
+      icon: <BarChart3 size={22} color={C.green} />,
+      title: "Consultoria Financeira",
+      desc: "Diagnóstico completo mais estruturação financeira para empresas que querem clareza e controle. Ideal para quem está pronto para parar de trabalhar no escuro.",
+      ideal: "Empresas faturando R$30k–500k/mês",
       highlight: true,
     },
     {
@@ -599,37 +599,63 @@ function ServicosSection() {
           </p>
         </div>
 
-        <div className="three-col" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
+        <div className="three-col" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginBottom: 32 }}>
           {services.map((s, i) => (
-            <div key={i} className="card card-light" style={{
-              padding: 32, position: "relative",
-              ...(s.highlight ? { border: `2px solid ${C.green}`, boxShadow: `0 8px 32px rgba(0,201,123,0.15)` } : {})
-            }}>
+            <div
+              key={i}
+              className="card card-light"
+              style={{
+                padding: 32,
+                position: "relative",
+                ...(s.highlight ? { border: `2px solid ${C.green}`, boxShadow: `0 8px 32px rgba(0,201,123,0.15)` } : {})
+              }}
+            >
               {s.highlight && (
                 <div style={{
-                  position: "absolute", top: -1, left: 20,
-                  background: C.green, color: "#fff",
-                  fontSize: 10, fontWeight: 800, padding: "4px 12px",
-                  borderRadius: "0 0 8px 8px", letterSpacing: "0.1em", textTransform: "uppercase",
+                  position: "absolute",
+                  top: -1,
+                  left: 20,
+                  background: C.green,
+                  color: "#fff",
+                  fontSize: 10,
+                  fontWeight: 800,
+                  padding: "4px 12px",
+                  borderRadius: "0 0 8px 8px",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
                 }}>
                   Mais popular
                 </div>
               )}
+
               <div style={{ width: 44, height: 44, borderRadius: 10, background: C.greenLight, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20, marginTop: s.highlight ? 20 : 0 }}>
                 {s.icon}
               </div>
-              <h3 style={{ fontSize: 20, fontWeight: 700, color: C.textDark, letterSpacing: "-0.02em", marginBottom: 12 }}>{s.title}</h3>
-              <p style={{ color: C.muted, fontSize: 14, lineHeight: 1.7, marginBottom: 20 }}>{s.desc}</p>
-              <div style={{ borderTop: `1px solid ${C.borderLight}`, paddingTop: 16, marginBottom: 24 }}>
-                <p style={{ fontSize: 11, color: C.greenDark, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 }}>Ideal para</p>
-                <p style={{ fontSize: 13, color: C.textDark }}>{s.ideal}</p>
+
+              <h3 style={{ fontSize: 20, fontWeight: 700, color: C.textDark, letterSpacing: "-0.02em", marginBottom: 12 }}>
+                {s.title}
+              </h3>
+
+              <p style={{ color: C.muted, fontSize: 14, lineHeight: 1.7, marginBottom: 20 }}>
+                {s.desc}
+              </p>
+
+              <div style={{ borderTop: `1px solid ${C.borderLight}`, paddingTop: 16 }}>
+                <p style={{ fontSize: 11, color: C.greenDark, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 }}>
+                  Ideal para
+                </p>
+                <p style={{ fontSize: 13, color: C.textDark }}>
+                  {s.ideal}
+                </p>
               </div>
-              <a href={`${C.whatsapp}?text=${WA_MSG}`} target="_blank" rel="noopener noreferrer"
-                className="btn btn-outline btn-sm" style={{ width: "100%", justifyContent: "center", borderRadius: 8 }}>
-                Quero saber mais <ArrowRight size={14} />
-              </a>
             </div>
           ))}
+        </div>
+
+        <div style={{ textAlign: "center" }}>
+          <a href="#diagnostico" className="btn btn-primary btn-lg">
+            Quero entender qual solução é ideal <ArrowRight size={18} />
+          </a>
         </div>
       </div>
     </section>
@@ -641,7 +667,7 @@ function ServicosSection() {
 ───────────────────────────────────────── */
 function ProvaSection() {
   const depoimentos = [
-    { quote: "Em 60 dias a AXI me mostrou que eu estava pagando R$18 mil por mês em custo invisível. Eliminamos isso e minha margem foi de 8% para 21% sem mudar o faturamento.", name: "Ricardo M.", cargo: "CEO, empresa de tecnologia — Fortaleza", result: "+R$18k de margem liberada" },
+    { quote: "Em 60 dias a Axi me mostrou que eu estava pagando R$18 mil por mês em custo invisível. Eliminamos isso e minha margem foi de 8% para 21% sem mudar o faturamento.", name: "Ricardo M.", cargo: "CEO, empresa de tecnologia — Fortaleza", result: "+R$18k de margem liberada" },
     { quote: "Eu evitava olhar o financeiro porque dava ansiedade. Hoje tenho dashboard diário e sei exatamente o que vai entrar e sair nos próximos 90 dias. Isso muda tudo.", name: "Fernanda L.", cargo: "Sócia, clínica médica — São Paulo", result: "90 dias de previsibilidade" },
     { quote: "Faturava R$200k e não sobrava nada. A AXI identificou que meu modelo de precificação estava errado há anos. Reajustamos e o lucro real apareceu no mesmo trimestre.", name: "Carlos S.", cargo: "Fundador, construtora — Recife", result: "Lucro real no 1º trimestre" },
   ];
@@ -695,16 +721,16 @@ function ProvaSection() {
 function SociosSection() {
   const socios = [
     {
-      name: "Igor",
-      role: "Sócio-fundador",
+      name: "Igor Guilherme",
+      role: "Sócio Financeiro",
       bio: "Especialista em estruturação financeira empresarial, com ampla experiência em diagnóstico de caixa, modelagem de crescimento e implantação de processos financeiros em pequenas e médias empresas.",
       tags: ["Finanças Corporativas", "BPO", "Crescimento"],
       photo: IMG_IGOR,
     },
     {
-      name: "Wilton",
-      role: "Sócio de Estratégia",
-      bio: "Focado em inteligência de negócios e execução financeira, Wilton lidera a operação de BPO e as análises estratégicas que transformam dados em decisões de alto impacto para os clientes AXI.",
+      name: "Wilton Lima",
+      role: "Sócio Estrategista",
+      bio: "Focado em inteligência de negócios e execução financeira, Wilton lidera a operação de BPO e as análises estratégicas que transformam dados em decisões de alto impacto para os clientes Axi.",
       tags: ["Estratégia", "BPO Financeiro", "Gestão"],
       photo: IMG_WILTON,
     },
@@ -720,7 +746,7 @@ function SociosSection() {
             <span style={{ color: C.green }}>Contrata pessoas que já viveram seu problema.</span>
           </h2>
           <p style={{ color: C.muted, maxWidth: 500, margin: "0 auto" }}>
-            Os sócios da AXI já atuaram dentro de empresas com os mesmos problemas que você enfrenta. Não é teoria — é experiência aplicada.
+            Os sócios da Axi já atuaram dentro de empresas com os mesmos problemas que você enfrenta. Não é teoria, é experiência aplicada.
           </p>
         </div>
 
@@ -731,17 +757,29 @@ function SociosSection() {
                 src={s.photo}
                 alt={s.name}
                 style={{
-                  width: "100%", height: 240, objectFit: "cover", objectPosition: "center top",
-                  borderRadius: 10, display: "block",
+                  width: "100%",
+                  aspectRatio: "1 / 1",
+                  objectFit: "cover",
+                  objectPosition: "center top",
+                  borderRadius: 10,
+                  display: "block",
                 }}
               />
               <div>
-                <h3 style={{ fontSize: 22, fontWeight: 800, color: C.textDark, letterSpacing: "-0.03em", marginBottom: 4 }}>{s.name}</h3>
-                <p style={{ fontSize: 12, color: C.green, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 14 }}>{s.role}</p>
-                <p style={{ color: C.muted, fontSize: 14, lineHeight: 1.7, marginBottom: 16 }}>{s.bio}</p>
+                <h3 style={{ fontSize: 22, fontWeight: 800, color: C.textDark, letterSpacing: "-0.03em", marginBottom: 4 }}>
+                  {s.name}
+                </h3>
+                <p style={{ fontSize: 12, color: C.green, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 14 }}>
+                  {s.role}
+                </p>
+                <p style={{ color: C.muted, fontSize: 14, lineHeight: 1.7, marginBottom: 16 }}>
+                  {s.bio}
+                </p>
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                   {s.tags.map((t, j) => (
-                    <span key={j} style={{ fontSize: 11, padding: "4px 12px", background: C.greenLight, color: C.greenDark, borderRadius: 100, fontWeight: 600 }}>{t}</span>
+                    <span key={j} style={{ fontSize: 11, padding: "4px 12px", background: C.greenLight, color: C.greenDark, borderRadius: 100, fontWeight: 600 }}>
+                      {t}
+                    </span>
                   ))}
                 </div>
               </div>
@@ -758,7 +796,7 @@ function SociosSection() {
 ───────────────────────────────────────── */
 const FAQS = [
   { q: "Minha empresa é pequena. Faz sentido contratar uma consultoria financeira?", a: "Sim — especialmente por isso. Empresas pequenas perdem proporcionalmente mais dinheiro por falta de estrutura financeira do que as grandes. Um erro de precificação ou uma conta ignorada tem impacto direto na sobrevivência do negócio. Atendemos empresas a partir de R$30k/mês de faturamento." },
-  { q: "Já tenho contador. O que a AXI faz de diferente?", a: "O contador cuida do que passou (fiscal, tributos, obrigações legais). A AXI cuida do que está acontecendo e do que vai acontecer: fluxo de caixa, previsibilidade, margem, decisão estratégica. São funções complementares, não concorrentes." },
+  { q: "Já tenho contador. O que a Axi faz de diferente?", a: "O contador cuida do que passou (fiscal, tributos, obrigações legais). A Axi cuida do que está acontecendo e do que vai acontecer: fluxo de caixa, previsibilidade, margem e decisão estratégica. São funções complementares, não concorrentes." },
   { q: "Quanto tempo leva para ver resultado?", a: "Nossos clientes costumam ter as primeiras percepções em até 30 dias — quando entregamos o diagnóstico completo com os principais pontos de sangria financeira. Mudanças estruturais e aumento de margem costumam aparecer entre 60 e 90 dias de implementação." },
   { q: "Como funciona o diagnóstico gratuito?", a: "É uma reunião de 45 a 60 minutos com um dos nossos sócios. Sem script de venda. Analisamos os números que você trouxer e você sai com pelo menos 3 insights acionáveis — mesmo que não contrate a gente." },
   { q: "E se eu não quiser gerenciar nada disso?", a: "Nosso BPO Financeiro foi feito exatamente para isso. Você delega a operação financeira inteira pra nós. Contas, relatórios, alertas, reuniões mensais — tudo sob nossa responsabilidade. Você só toma a decisão final." },
@@ -996,40 +1034,56 @@ function Footer() {
       <div className="container">
         <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", gap: 48, marginBottom: 48 }} className="two-col">
           <div>
-            <img src={LOGO_DARK} alt="AXI Business" style={{ height: 30, marginBottom: 16, objectFit: "contain" }} />
+            <img src={LOGO_DARK} alt="Axi Business" style={{ height: 18, marginBottom: 16, objectFit: "contain" }} />
             <p style={{ color: "rgba(255,255,255,0.35)", fontSize: 14, lineHeight: 1.75, maxWidth: 320 }}>
               Consultoria financeira empresarial para quem quer parar de trabalhar no escuro e começar a crescer com inteligência.
             </p>
           </div>
+
           <div>
-            <p style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 700, marginBottom: 16 }}>Página</p>
+            <p style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 700, marginBottom: 16 }}>
+              Página
+            </p>
             {navLinks.map((l, i) => (
               <div key={i} style={{ marginBottom: 10 }}>
-                <a href={l.href} style={{ color: "rgba(255,255,255,0.4)", fontSize: 14, textDecoration: "none", transition: "color 0.2s" }}
+                <a
+                  href={l.href}
+                  style={{ color: "rgba(255,255,255,0.4)", fontSize: 14, textDecoration: "none", transition: "color 0.2s" }}
                   onMouseEnter={e => e.target.style.color = C.green}
-                  onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.4)"}>
+                  onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.4)"}
+                >
                   {l.label}
                 </a>
               </div>
             ))}
           </div>
+
           <div>
-            <p style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 700, marginBottom: 16 }}>Contato</p>
+            <p style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 700, marginBottom: 16 }}>
+              Contato
+            </p>
             <div style={{ marginBottom: 12, display: "flex", gap: 8, alignItems: "center" }}>
               <Phone size={14} color={C.green} />
-              <a href={`${C.whatsapp}?text=${WA_MSG}`} style={{ color: "rgba(255,255,255,0.4)", fontSize: 14, textDecoration: "none" }}>(85) 99221-5449</a>
+              <a href={`${C.whatsapp}?text=${WA_MSG}`} style={{ color: "rgba(255,255,255,0.4)", fontSize: 14, textDecoration: "none" }}>
+                (85) 99221-5449
+              </a>
             </div>
             <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
               <Mail size={14} color={C.green} />
-              <a href="mailto:contato@axibusiness.com.br" style={{ color: "rgba(255,255,255,0.4)", fontSize: 14, textDecoration: "none" }}>contato@axibusiness.com.br</a>
+              <a href="mailto:contato@axibusiness.com.br" style={{ color: "rgba(255,255,255,0.4)", fontSize: 14, textDecoration: "none" }}>
+                contato@axibusiness.com.br
+              </a>
             </div>
           </div>
         </div>
+
         <div style={{ borderTop: "1px solid rgba(255,255,255,0.05)", paddingTop: 24, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-          <p style={{ color: "rgba(255,255,255,0.2)", fontSize: 13 }}>© 2025 AXI Business. Todos os direitos reservados.</p>
+          <p style={{ color: "rgba(255,255,255,0.2)", fontSize: 13 }}>© 2025 Axi Business. Todos os direitos reservados.</p>
           <div style={{ display: "flex", gap: 20 }}>
             {["Política de Privacidade", "Termos de Uso"].map((l, i) => (
-              <a key={i} href="#" style={{ color: "rgba(255,255,255,0.2)", fontSize: 13, textDecoration: "none" }}>{l}</a>
+              <a key={i} href="#" style={{ color: "rgba(255,255,255,0.2)", fontSize: 13, textDecoration: "none" }}>
+                {l}
+              </a>
             ))}
           </div>
         </div>
