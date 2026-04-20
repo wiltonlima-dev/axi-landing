@@ -183,10 +183,93 @@ const styles = `
 
   @media (max-width: 900px) {
     section { padding: 64px 0; }
-    .two-col { grid-template-columns: 1fr !important; gap: 48px !important; }
+    .two-col { grid-template-columns: 1fr !important; gap: 40px !important; }
     .three-col { grid-template-columns: 1fr !important; }
     .hide-mobile { display: none !important; }
-    .btn-lg { padding: 16px 28px; font-size: 15px; }
+    .btn-lg { padding: 16px 24px; font-size: 15px; }
+    .container { padding: 0 20px; }
+
+    /* Hero: empilha foto abaixo do texto */
+    #hero .two-col > div:last-child { order: -1; }
+
+    /* Método: remove sticky no mobile */
+    #metodo [style*="position: sticky"] { position: relative !important; top: auto !important; }
+
+    /* Nav: garante logo visível */
+    nav img { height: 28px !important; }
+  }
+
+  @media (max-width: 480px) {
+    section { padding: 48px 0; }
+    .container { padding: 0 16px; }
+
+    /* Botões em coluna no hero */
+    #hero .btn-lg { width: 100%; justify-content: center; }
+    #hero > div > div > div:first-child > div:nth-child(3) {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Stats do hero em linha compacta */
+    #hero .stat-num { font-size: 28px !important; }
+    #hero > div > div > div:first-child > div:last-child {
+      gap: 20px !important;
+    }
+
+    /* Urgency pill: quebra o texto */
+    #hero > div > div:first-child {
+      font-size: 11px !important;
+      padding: 6px 12px !important;
+      white-space: normal !important;
+      text-align: left;
+    }
+
+    /* Foto hero menor no mobile */
+    #hero img[alt*="sócios"] {
+      height: 260px !important;
+    }
+
+    /* Badge flutuante: reposiciona */
+    #hero [style*="position: absolute"][style*="bottom: 24"] {
+      left: 0 !important;
+      bottom: -16px !important;
+      font-size: 13px;
+    }
+
+    /* Método: tipografia e espaço */
+    #metodo h2 { font-size: 26px !important; }
+    #metodo p  { font-size: 14px !important; }
+    #metodo .card-dark { padding: 20px 16px !important; }
+    #metodo h3 { font-size: 16px !important; }
+
+    /* Formulário: campos full width */
+    .field { font-size: 16px !important; } /* evita zoom no iOS */
+
+    /* Botão único ocupa full width */
+    #diagnostico .btn-primary { width: 100%; justify-content: center; }
+    #diagnostico .btn-outline-dark { width: 100%; justify-content: center; }
+
+    /* Final CTA: botões em coluna */
+    #final-cta { text-align: center; }
+    #final-cta > div > div:last-child {
+      flex-direction: column;
+      align-items: center;
+    }
+    #final-cta .btn { width: 100%; justify-content: center; }
+
+    /* Depoimentos: badge resultado quebra linha */
+    #provas .card-dark > div:last-child {
+      flex-direction: column;
+      align-items: flex-start !important;
+      gap: 10px !important;
+    }
+
+    /* Socios: foto 1:1 */
+    #socios img { height: 180px !important; }
+
+    /* FAQ: padding interno menor */
+    #faq button { padding: 16px 18px !important; }
+    #faq button span:first-child { font-size: 14px !important; }
   }
 `;
 
