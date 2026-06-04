@@ -714,25 +714,79 @@ const depoimentos = [
 
         <div className="three-col" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginBottom: 48 }}>
           {depoimentos.map((d, i) => (
-            <div key={i} className="card card-dark" style={{ padding: 28 }}>
-              <div style={{ display: "flex", gap: 3, marginBottom: 20 }}>
-                {[...Array(5)].map((_, j) => <Star key={j} size={13} fill={C.green} color={C.green} />)}
-              </div>
-              <p style={{ color: "rgba(255,255,255,0.75)", fontSize: 15, lineHeight: 1.75, marginBottom: 24, fontStyle: "italic" }}>
-                "{d.quote}"
-              </p>
-              <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: 20, display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 12 }}>
-                <div>
-                  <p style={{ fontSize: 14, fontWeight: 700, color: C.text }}>{d.name}</p>
-                  <p style={{ fontSize: 12, color: "rgba(255,255,255,0.35)" }}>{d.cargo}</p>
-                </div>
-                <div style={{ background: C.greenFaint, border: `1px solid ${C.border}`, borderRadius: 8, padding: "6px 12px", flexShrink: 0 }}>
-                  <p style={{ fontSize: 11, color: C.green, fontWeight: 700, whiteSpace: "nowrap" }}>{d.result}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+  <div
+    key={i}
+    className="card card-dark"
+    style={{
+      padding: 28,
+      minHeight: 360,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+    }}
+  >
+    <div>
+      <div style={{ display: "flex", gap: 3, marginBottom: 22, justifyContent: "center" }}>
+        {[...Array(5)].map((_, j) => (
+          <Star key={j} size={13} fill={C.green} color={C.green} />
+        ))}
+      </div>
+
+      <p
+        style={{
+          color: "rgba(255,255,255,0.75)",
+          fontSize: 15,
+          lineHeight: 1.7,
+          margin: 0,
+          fontStyle: "italic",
+          textAlign: "center",
+        }}
+      >
+        "{d.quote}"
+      </p>
+    </div>
+
+    <div
+      style={{
+        borderTop: `1px solid ${C.border}`,
+        paddingTop: 20,
+        marginTop: 28,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        textAlign: "center",
+        gap: 12,
+      }}
+    >
+      <div>
+        <p style={{ fontSize: 14, fontWeight: 700, color: C.text, marginBottom: 4 }}>{d.name}</p>
+        <p style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", margin: 0 }}>{d.cargo}</p>
+      </div>
+
+      <div
+        style={{
+          background: C.greenFaint,
+          border: `1px solid ${C.border}`,
+          borderRadius: 8,
+          padding: "7px 12px",
+          maxWidth: "100%",
+        }}
+      >
+        <p
+          style={{
+            fontSize: 11,
+            color: C.green,
+            fontWeight: 700,
+            lineHeight: 1.3,
+            margin: 0,
+          }}
+        >
+          {d.result}
+        </p>
+      </div>
+    </div>
+  </div>
+))}
 
         <div style={{ textAlign: "center" }}>
           <a href="#diagnostico" className="btn btn-primary btn-lg">
