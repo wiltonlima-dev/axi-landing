@@ -676,11 +676,30 @@ function ServicosSection() {
    PROVA SOCIAL — dark section
 ───────────────────────────────────────── */
 function ProvaSection() {
-  const depoimentos = [
-    { quote: "Em 60 dias a Axi me mostrou que eu estava pagando R$18 mil por mês em custo invisível. Eliminamos isso e minha margem foi de 8% para 21% sem mudar o faturamento.", name: "Ricardo M.", cargo: "CEO, empresa de tecnologia — Fortaleza", result: "+R$18k de margem liberada" },
-    { quote: "Eu evitava olhar o financeiro porque dava ansiedade. Hoje tenho dashboard diário e sei exatamente o que vai entrar e sair nos próximos 90 dias. Isso muda tudo.", name: "Fernanda L.", cargo: "Sócia, clínica médica — São Paulo", result: "90 dias de previsibilidade" },
-    { quote: "Faturava R$200k e não sobrava nada. A AXI identificou que meu modelo de precificação estava errado há anos. Reajustamos e o lucro real apareceu no mesmo trimestre.", name: "Carlos S.", cargo: "Fundador, construtora — Recife", result: "Lucro real no 1º trimestre" },
-  ];
+const depoimentos = [
+  {
+    quote:
+      "A Axi Business tem sido essencial para nosso crescimento. Trouxe organização, clareza nos dados e mais segurança nas decisões. Hoje conseguimos agir com mais precisão e estamos muito satisfeitos com essa parceria.",
+    name: "Riany Barcelar",
+    cargo: "@hortensia_conceito",
+    result: "Mais clareza e segurança nas decisões",
+  },
+  {
+    quote:
+      "Após mais de dois anos de parceria, posso afirmar que a Axi é uma das empresas mais importantes da nossa operação. O suporte e a organização que trouxeram foram fundamentais para alcançarmos o nível em que estamos hoje.",
+    name: "Maycon I.S.",
+    cargo: "@ppocontingencia",
+    result: "Mais de 2 anos de parceria",
+  },
+  {
+    quote:
+      "Quero agradecer ao Igor e ao Wilton por todo o apoio, orientação e dedicação ao longo dessa jornada. Com a ajuda de vocês, conseguimos crescer com mais clareza e visão de futuro. Sou muito grata por essa parceria.",
+    name: "Lucia Fontenele",
+    cargo: "@equiposmedicosfor",
+    result: "Crescimento com visão de futuro",
+  },
+];
+
 
   return (
     <section id="provas" style={{ background: C.charcoal, color: C.text }}>
@@ -717,7 +736,7 @@ function ProvaSection() {
 
         <div style={{ textAlign: "center" }}>
           <a href="#diagnostico" className="btn btn-primary btn-lg">
-            Quero esse resultado também <ArrowRight size={18} />
+            Quero organizar meu financeiro também <ArrowRight size={18} />
           </a>
         </div>
       </div>
