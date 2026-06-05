@@ -676,117 +676,84 @@ function ServicosSection() {
    PROVA SOCIAL — dark section
 ───────────────────────────────────────── */
 function ProvaSection() {
-const depoimentos = [
-  {
-    quote:
-      "A Axi Business tem sido essencial para nosso crescimento. Trouxe organização, clareza nos dados e mais segurança nas decisões. Hoje conseguimos agir com mais precisão e estamos muito satisfeitos com essa parceria.",
-    name: "Riany Barcelar",
-    cargo: "@hortensia_conceito",
-    result: "Mais clareza e segurança nas decisões",
-  },
-  {
-    quote:
-      "Após mais de dois anos de parceria, posso afirmar que a Axi é uma das empresas mais importantes da nossa operação. O suporte e a organização que trouxeram foram fundamentais para alcançarmos o nível em que estamos hoje.",
-    name: "Maycon I.S.",
-    cargo: "@ppocontingencia",
-    result: "Mais de 2 anos de parceria",
-  },
-  {
-    quote:
-      "Quero agradecer ao Igor e ao Wilton por todo o apoio, orientação e dedicação ao longo dessa jornada. Com a ajuda de vocês, conseguimos crescer com mais clareza e visão de futuro. Sou muito grata por essa parceria.",
-    name: "Lucia Fontenele",
-    cargo: "@equiposmedicosfor",
-    result: "Crescimento com visão de futuro",
-  },
-];
-
+  const depoimentos = [
+    {
+      quote:
+        "A Axi Business tem sido essencial para nosso crescimento. Trouxe organização, clareza nos dados e mais segurança nas decisões. Hoje conseguimos agir com mais precisão e estamos muito satisfeitos com essa parceria.",
+      name: "Riany Barcelar",
+      cargo: "@hortensia_conceito",
+      result: "Mais clareza e segurança nas decisões",
+    },
+    {
+      quote:
+        "Após mais de dois anos de parceria, posso afirmar que a Axi é uma das empresas mais importantes da nossa operação. O suporte e a organização que trouxeram foram fundamentais para alcançarmos o nível em que estamos hoje.",
+      name: "Maycon I.S.",
+      cargo: "@ppocontingencia",
+      result: "Mais de 2 anos de parceria",
+    },
+    {
+      quote:
+        "Quero agradecer ao Igor e ao Wilton por todo o apoio, orientação e dedicação ao longo dessa jornada. Com a ajuda de vocês, conseguimos crescer com mais clareza e visão de futuro. Sou muito grata por essa parceria.",
+      name: "Lucia Fontenele",
+      cargo: "@equiposmedicosfor",
+      result: "Crescimento com visão de futuro",
+    },
+  ];
 
   return (
     <section id="provas" style={{ background: C.charcoal, color: C.text }}>
       <div className="container">
         <div style={{ textAlign: "center", marginBottom: 64 }}>
-          <span className="tag tag-dark"><Star size={11} /> Resultados reais</span>
-<h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 16, lineHeight: 1.15 }}>
-  Não é promessa.<br />
-  <span style={{ color: C.green }}>É o que acontece na prática.</span>
-</h2>
+          <span className="tag tag-dark">
+            <Star size={11} /> Resultados reais
+          </span>
+
+          <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 16, lineHeight: 1.15 }}>
+            Não é promessa.<br />
+            <span style={{ color: C.green }}>É o que acontece na prática.</span>
+          </h2>
         </div>
 
-        <div className="three-col" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginBottom: 48 }}>
+        <div className="three-col" style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 18, marginBottom: 48, alignItems: "stretch" }}>
           {depoimentos.map((d, i) => (
-  <div
-    key={i}
-    className="card card-dark"
-    style={{
-      padding: 28,
-      minHeight: 360,
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "space-between",
-    }}
-  >
-    <div>
-      <div style={{ display: "flex", gap: 3, marginBottom: 22, justifyContent: "center" }}>
-        {[...Array(5)].map((_, j) => (
-          <Star key={j} size={13} fill={C.green} color={C.green} />
-        ))}
-      </div>
+            <div
+              key={i}
+              className="card card-dark"
+              style={{
+                padding: 28,
+                minHeight: 360,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
+              <div>
+                <div style={{ display: "flex", gap: 3, marginBottom: 22, justifyContent: "center" }}>
+                  {[...Array(5)].map((_, j) => (
+                    <Star key={j} size={13} fill={C.green} color={C.green} />
+                  ))}
+                </div>
 
-      <p
-        style={{
-          color: "rgba(255,255,255,0.75)",
-          fontSize: 15,
-          lineHeight: 1.7,
-          margin: 0,
-          fontStyle: "italic",
-          textAlign: "center",
-        }}
-      >
-        "{d.quote}"
-      </p>
-    </div>
+                <p style={{ color: "rgba(255,255,255,0.75)", fontSize: 15, lineHeight: 1.7, margin: 0, fontStyle: "italic", textAlign: "center" }}>
+                  "{d.quote}"
+                </p>
+              </div>
 
-    <div
-      style={{
-        borderTop: `1px solid ${C.border}`,
-        paddingTop: 20,
-        marginTop: 28,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        textAlign: "center",
-        gap: 12,
-      }}
-    >
-      <div>
-        <p style={{ fontSize: 14, fontWeight: 700, color: C.text, marginBottom: 4 }}>{d.name}</p>
-        <p style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", margin: 0 }}>{d.cargo}</p>
-      </div>
+              <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: 20, marginTop: 28, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: 12 }}>
+                <div>
+                  <p style={{ fontSize: 14, fontWeight: 700, color: C.text, marginBottom: 4 }}>{d.name}</p>
+                  <p style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", margin: 0 }}>{d.cargo}</p>
+                </div>
 
-      <div
-        style={{
-          background: C.greenFaint,
-          border: `1px solid ${C.border}`,
-          borderRadius: 8,
-          padding: "7px 12px",
-          maxWidth: "100%",
-        }}
-      >
-        <p
-          style={{
-            fontSize: 11,
-            color: C.green,
-            fontWeight: 700,
-            lineHeight: 1.3,
-            margin: 0,
-          }}
-        >
-          {d.result}
-        </p>
-      </div>
-    </div>
-  </div>
-))}
+                <div style={{ background: C.greenFaint, border: `1px solid ${C.border}`, borderRadius: 8, padding: "7px 12px", maxWidth: "100%" }}>
+                  <p style={{ fontSize: 11, color: C.green, fontWeight: 700, lineHeight: 1.3, margin: 0 }}>
+                    {d.result}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
 
         <div style={{ textAlign: "center" }}>
           <a href="#diagnostico" className="btn btn-primary btn-lg">
