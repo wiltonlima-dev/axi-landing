@@ -59,7 +59,7 @@ function Hero() {
         }}>
           <span className="pulse-dot" style={{ width: 7, height: 7, borderRadius: "50%", background: C.red, display: "inline-block" }} />
           <span style={{ fontSize: 12, color: "#FC8181", fontWeight: 600, letterSpacing: "0.06em" }}>
-            Vagas limitadas - encerram em {cd.d}d {cd.h}h {cd.m}m {cd.s}s
+            Vagas limitadas: encerram em {cd.d}d {cd.h}h {cd.m}m {cd.s}s
           </span>
         </div>
 
@@ -101,7 +101,7 @@ function Hero() {
           <div style={{ position: "relative" }}>
             <img
               src={IMG.juntos}
-              alt="Igor e Wilton - sócios Axi Business"
+              alt="Igor e Wilton, sócios da Axi Business"
               className="hero-image"
               width="1100"
               height="708"
@@ -585,11 +585,11 @@ function LojasBand() {
    FAQ / FORMULÁRIO — conteúdo da página geral
 ───────────────────────────────────────── */
 const FAQS = [
-  { q: "Minha empresa é pequena. Faz sentido contratar uma consultoria financeira?", a: "Sim — especialmente por isso. Empresas pequenas perdem proporcionalmente mais dinheiro por falta de estrutura financeira do que as grandes. Um erro de precificação ou uma conta ignorada tem impacto direto na sobrevivência do negócio. Atendemos negócios de todos os tamanhos e modelos, e o escopo e o investimento se adaptam à realidade de cada empresa." },
+  { q: "Minha empresa é pequena. Faz sentido contratar uma consultoria financeira?", a: "Sim, especialmente por isso. Empresas pequenas perdem proporcionalmente mais dinheiro por falta de estrutura financeira do que as grandes. Um erro de precificação ou uma conta ignorada tem impacto direto na sobrevivência do negócio. Atendemos negócios de todos os tamanhos e modelos, e o escopo e o investimento se adaptam à realidade de cada empresa." },
   { q: "Já tenho contador. O que a Axi faz de diferente?", a: "O contador cuida do que passou (fiscal, tributos, obrigações legais). A Axi cuida do que está acontecendo e do que vai acontecer: fluxo de caixa, previsibilidade, margem e decisão estratégica. São funções complementares, não concorrentes." },
-  { q: "Quanto tempo leva para ver resultado?", a: "Nossos clientes costumam ter as primeiras percepções em até 30 dias — quando entregamos o diagnóstico completo com os principais pontos de sangria financeira. Mudanças estruturais e aumento de margem costumam aparecer entre 60 e 90 dias de implementação." },
-  { q: "Como funciona o diagnóstico gratuito?", a: "É uma conversa de 1 hora com um dos nossos sócios. Sem script de venda. Analisamos os números que você trouxer e você sai com pelo menos 3 insights acionáveis — mesmo que não contrate a gente." },
-  { q: "E se eu não quiser gerenciar nada disso?", a: "Nosso BPO Financeiro foi feito exatamente para isso. Você delega a operação financeira inteira pra nós. Contas, relatórios, alertas, reuniões mensais — tudo sob nossa responsabilidade. Você só toma a decisão final." },
+  { q: "Quanto tempo leva para ver resultado?", a: "Nossos clientes costumam ter as primeiras percepções em até 30 dias, quando entregamos o diagnóstico completo com os principais pontos de sangria financeira. Mudanças estruturais e aumento de margem costumam aparecer entre 60 e 90 dias de implementação." },
+  { q: "Como funciona o diagnóstico gratuito?", a: "É uma conversa de 1 hora com um dos nossos sócios. Sem script de venda. Analisamos os números que você trouxer e você sai com pelo menos 3 insights acionáveis, mesmo que não contrate a gente." },
+  { q: "E se eu não quiser gerenciar nada disso?", a: "Nosso BPO Financeiro foi feito exatamente para isso. Você delega a operação financeira inteira pra nós. Contas, relatórios, alertas, reuniões mensais. Tudo sob nossa responsabilidade. Você só toma a decisão final." },
 ];
 
 const FORM_FIELDS = [
@@ -597,7 +597,7 @@ const FORM_FIELDS = [
   { name: "whatsapp", label: "WhatsApp *", type: "tel", placeholder: "(85) 99999-9999", required: true, autoComplete: "tel" },
   { name: "empresa", label: "Nome ou @ da empresa", type: "text", placeholder: "@suaempresa", required: false, autoComplete: "organization" },
   { name: "segmento", label: "Segmento da empresa *", type: "select", required: true, options: ["Varejo e moda", "Comércio e distribuição", "Serviços", "Saúde e clínicas", "Indústria", "Imobiliário e construção", "Negócio digital", "Outro"] },
-  { name: "faturamento", label: "Faturamento mensal *", type: "select", required: true, options: ["Até R$30 mil", "R$30 mil – R$100 mil", "R$100 mil – R$300 mil", "R$300 mil – R$1 milhão", "Acima de R$1 milhão"] },
+  { name: "faturamento", label: "Faturamento mensal *", type: "select", required: true, options: ["Até R$30 mil", "R$30 mil a R$100 mil", "R$100 mil a R$300 mil", "R$300 mil a R$1 milhão", "Acima de R$1 milhão"] },
   { name: "dor_financeira", label: "O que mais pesa hoje no financeiro?", type: "textarea", placeholder: "Ex: caixa apertado, não sei quanto lucro, sócios desalinhados...", required: false },
 ];
 
@@ -643,8 +643,8 @@ export default function App() {
       <FinalCTA
         badge="Você ainda está aqui. Isso significa algo."
         title={["Todo mês que passa sem estrutura", "é dinheiro que não volta."]}
-        text="A decisão de organizar o financeiro da sua empresa nunca vai ser urgente — até o dia que for tarde demais."
-        ctaLabel="Começar agora — é gratuito"
+        text="A decisão de organizar o financeiro da sua empresa nunca vai ser urgente. Até o dia em que for tarde demais."
+        ctaLabel="Começar agora, é gratuito"
         waMsg={WA_DIAG}
         origem={ORIGEM}
       />

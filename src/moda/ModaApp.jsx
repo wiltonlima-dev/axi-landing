@@ -312,7 +312,7 @@ const FORM_FIELDS = [
   { name: "whatsapp", label: "WhatsApp *", type: "tel", placeholder: "(85) 99999-9999", required: true, autoComplete: "tel" },
   { name: "loja", label: "Nome ou @ da loja", type: "text", placeholder: "@sualoja", required: false },
   { name: "canal", label: "Onde você vende? *", type: "select", required: true, options: ["Loja física", "Online (Instagram, site, marketplace)", "Loja física e online"] },
-  { name: "faturamento", label: "Faturamento mensal da loja *", type: "select", required: true, options: ["Até R$30 mil", "R$30 mil – R$100 mil", "R$100 mil – R$300 mil", "Acima de R$300 mil"] },
+  { name: "faturamento", label: "Faturamento mensal da loja *", type: "select", required: true, options: ["Até R$30 mil", "R$30 mil a R$100 mil", "R$100 mil a R$300 mil", "Acima de R$300 mil"] },
   { name: "dor_financeira", label: "O que mais pesa hoje na loja?", type: "textarea", placeholder: "Ex: estoque parado, taxa da maquininha, não sei quanto lucro...", required: false },
 ];
 
@@ -332,7 +332,7 @@ function Diagnostico() {
       formHint="Leva menos de 1 minuto."
       fields={FORM_FIELDS}
       hidden={{ segmento: "Moda e varejo" }}
-      subject="Novo lead - Diagnóstico Axi Business (Lojas)"
+      subject="Novo lead: Diagnóstico Axi Business (Lojas)"
       origem={ORIGEM}
       waIntro="Olá! Vim pela página de lojas da Axi Business e quero agendar meu diagnóstico gratuito."
     />

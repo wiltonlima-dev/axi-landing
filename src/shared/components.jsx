@@ -401,7 +401,7 @@ export function DiagnosticoSection({
   formHint = "Preenchimento leva menos de 2 minutos.",
   fields,
   hidden = {},
-  subject = "Novo lead - Diagnóstico Axi Business",
+  subject = "Novo lead: Diagnóstico Axi Business",
   origem = "pagina-geral",
   waIntro = "Olá! Vim pelo site da Axi Business e quero agendar meu diagnóstico gratuito.",
 }) {
