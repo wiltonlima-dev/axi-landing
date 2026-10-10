@@ -1,4 +1,4 @@
-import { AlertTriangle, ArrowRight, Phone, Store, Zap } from "lucide-react";
+import { AlertTriangle, ArrowRight, Phone, Store, Zap, Video } from "lucide-react";
 import { C, styles } from "../shared/theme.js";
 import {
   WaButton, Nav, ProvaSection, SociosSection, FAQ, DiagnosticoSection, FinalCTA, Footer, StickyCTA
@@ -121,7 +121,7 @@ function Hero() {
               A Axi Business organiza o financeiro de lojas de moda para você saber quanto realmente ganha em cada venda, quanto pode retirar e onde o dinheiro escapa entre a maquininha, o estoque e o fornecedor.
             </p>
 
-            <div className="hero-actions" style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 56 }}>
+            <div className="hero-actions" style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 16 }}>
               <a href="#diagnostico" className="btn btn-primary btn-lg">
                 Agendar diagnóstico gratuito <ArrowRight size={18} />
               </a>
@@ -129,6 +129,10 @@ function Hero() {
                 <Phone size={17} /> WhatsApp
               </WaButton>
             </div>
+            <p style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14, color: "rgba(255,255,255,0.6)", marginBottom: 48 }}>
+              <Video size={16} color={C.green} style={{ flexShrink: 0 }} />
+              Online, por videochamada, para lojas de todo o Brasil.
+            </p>
 
             <div className="hero-stats" style={{ display: "flex", gap: 40, flexWrap: "wrap", borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 32 }}>
               {[
@@ -257,7 +261,7 @@ function SolucaoSection() {
 ───────────────────────────────────────── */
 function ComoFuncionaSection() {
   const steps = [
-    { n: "1", title: "Diagnóstico gratuito de 1 hora", desc: "Uma conversa com um dos sócios para olhar os números da sua loja e mostrar onde o dinheiro está escapando." },
+    { n: "1", title: "Diagnóstico gratuito de 1 hora", desc: "Uma videochamada com um dos sócios para olhar os números da sua loja e mostrar onde o dinheiro está escapando." },
     { n: "2", title: "Plano para a sua loja", desc: "Se fizer sentido para os dois lados, você recebe uma proposta com o que vamos organizar primeiro e em quanto tempo." },
     { n: "3", title: "Implantação e acompanhamento", desc: "Montamos as ferramentas junto com você e sua equipe, e acompanhamos os números da loja todo mês." },
   ];
@@ -303,13 +307,14 @@ const FAQS = [
   { q: "Minha loja é pequena. Vale a pena?", a: "Loja pequena é justamente onde um erro de preço ou de taxa pesa mais no fim do mês. A Axi atende lojas de todos os tamanhos, e o escopo e o investimento se adaptam à realidade de cada loja." },
   { q: "Vendo na loja física e pelo Instagram. Vocês organizam os dois?", a: "Sim. As vendas de todos os canais entram no mesmo controle, com as taxas e o frete de cada um, para você ver qual canal realmente dá lucro." },
   { q: "Já tenho contador. O que muda?", a: "O contador cuida do que passou: impostos, folha e obrigações legais. A Axi cuida do que está acontecendo e do que vai acontecer: caixa, margem, preço, estoque e metas. São trabalhos que se completam." },
-  { q: "Como funciona o diagnóstico gratuito?", a: "É uma conversa de 1 hora com um dos sócios da Axi. Você traz os números que tiver e sai com pelo menos 3 pontos de ação para a sua loja, mesmo que não contrate a gente." },
+  { q: "Como funciona o diagnóstico gratuito?", a: "É uma conversa online de 1 hora, por videochamada, com um dos sócios da Axi. Você traz os números que tiver e sai com pelo menos 3 pontos de ação para a sua loja, mesmo que não contrate a gente." },
+  { q: "Minha loja não fica em Fortaleza. Vocês atendem?", a: "Atendemos. O diagnóstico e o acompanhamento são online, então lojas de qualquer cidade do Brasil trabalham com a Axi do mesmo jeito: reuniões por videochamada, controles na nuvem e contato direto pelo WhatsApp." },
   { q: "Preciso organizar tudo antes da reunião?", a: "Não. Traga o que tiver à mão: extrato da maquininha, relatório de vendas do sistema, contas do mês. Organizar é com a gente." },
 ];
 
 const FORM_FIELDS = [
   { name: "nome", label: "Seu nome *", type: "text", placeholder: "Como podemos te chamar?", required: true, autoComplete: "name" },
-  { name: "whatsapp", label: "WhatsApp *", type: "tel", placeholder: "(85) 99999-9999", required: true, autoComplete: "tel" },
+  { name: "whatsapp", label: "WhatsApp *", type: "tel", placeholder: "(DDD) 99999-9999", required: true, autoComplete: "tel" },
   { name: "loja", label: "Nome ou @ da loja", type: "text", placeholder: "@sualoja", required: false },
   { name: "canal", label: "Onde você vende? *", type: "select", required: true, options: ["Loja física", "Online (Instagram, site, marketplace)", "Loja física e online"] },
   { name: "faturamento", label: "Faturamento mensal da loja *", type: "select", required: true, options: ["Até R$30 mil", "R$30 mil a R$100 mil", "R$100 mil a R$300 mil", "Acima de R$300 mil"] },
@@ -321,7 +326,7 @@ function Diagnostico() {
   return (
     <DiagnosticoSection
       title={["1 hora para enxergar", "o lucro real da sua loja."]}
-      text="Uma conversa direta com um dos sócios da Axi. Sem script de venda: você traz os números da loja e sai sabendo o que resolver primeiro."
+      text="Uma conversa online, por videochamada, direto com um dos sócios da Axi. Sem script de venda: você traz os números da loja e sai sabendo o que resolver primeiro."
       bullets={[
         "Onde a sua loja está perdendo dinheiro hoje",
         "Quanto as taxas e o parcelamento custam por mês",
