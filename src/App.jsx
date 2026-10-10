@@ -148,33 +148,35 @@ function Hero() {
 
 /* ─────────────────────────────────────────
    MARCAS — empresas onde os sócios atuaram como executivos
-   Para trocar o nome por logo: salve o arquivo em public/img/marcas/
-   (de preferência PNG transparente ou SVG) e preencha "logo" abaixo.
-   Os logos aparecem em branco sobre o fundo escuro.
+   Para incluir uma marca: salve o logo em public/img/marcas/ (SVG ou PNG
+   transparente) e adicione uma linha abaixo. "h" é a altura em pixels,
+   para equilibrar logos largos e quadrados. Sem logo, aparece o nome.
 ───────────────────────────────────────── */
 const MARCAS = [
-  { nome: "XP Investimentos", logo: null },
-  { nome: "Bradesco",         logo: null },
-  { nome: "Apple",            logo: null },
-  { nome: "iByte",            logo: null },
-  { nome: "RioMar Shopping",  logo: null },
+  { nome: "XP Investimentos",   logo: "/img/marcas/xp.svg",                h: 42 },
+  { nome: "BTG Pactual",        logo: "/img/marcas/btg-pactual.svg",       h: 36 },
+  { nome: "Bradesco",           logo: "/img/marcas/bradesco.svg",          h: 30 },
+  { nome: "Banco do Nordeste",  logo: "/img/marcas/banco-do-nordeste.svg", h: 38 },
+  { nome: "Apple",              logo: "/img/marcas/apple.svg",             h: 44 },
+  { nome: "RioMar Shopping",    logo: "/img/marcas/riomar.svg",            h: 44 },
+  { nome: "Pague Menos",        logo: "/img/marcas/pague-menos.svg",       h: 34 },
 ];
 
 function MarcasSection() {
   const item = (m, i, hidden) => (
     <div key={`${hidden ? "b" : "a"}-${i}`} className="marquee-item">
       {m.logo
-        ? <img src={m.logo} alt={hidden ? "" : m.nome} loading="lazy" />
+        ? <img src={m.logo} alt={hidden ? "" : m.nome} loading="lazy" style={{ height: m.h || 36 }} />
         : <span className="marquee-name">{m.nome}</span>}
     </div>
   );
   return (
-    <section style={{ background: "#0B150F", color: C.text, padding: "44px 0 48px", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+    <section style={{ background: "#fff", color: C.textDark, padding: "44px 0 48px", borderBottom: `1px solid ${C.borderLight}` }}>
       <div className="container" style={{ textAlign: "center", marginBottom: 22 }}>
-        <p style={{ fontSize: 11, color: C.green, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 8 }}>
+        <p style={{ fontSize: 11, color: C.greenDark, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 8 }}>
           Ampla experiência em grandes marcas
         </p>
-        <p style={{ fontSize: 15, color: "rgba(255,255,255,0.55)" }}>
+        <p style={{ fontSize: 15, color: C.muted }}>
           Antes da Axi, os sócios atuaram como executivos em empresas como:
         </p>
       </div>
