@@ -157,6 +157,7 @@ export const DEPOIMENTOS = [
       "A Axi Business tem sido essencial para nosso crescimento. Trouxe organização, clareza nos dados e mais segurança nas decisões. Hoje conseguimos agir com mais precisão e estamos muito satisfeitos com essa parceria.",
     name: "Riany Barcelar",
     cargo: "@hortensia_conceito",
+    photo: "/img/depoimentos/riany.webp",
     result: "Mais clareza e segurança nas decisões",
   },
   {
@@ -164,6 +165,7 @@ export const DEPOIMENTOS = [
       "Após mais de dois anos de parceria, posso afirmar que a Axi é uma das empresas mais importantes da nossa operação. O suporte e a organização que trouxeram foram fundamentais para alcançarmos o nível em que estamos hoje.",
     name: "Maycon I.S.",
     cargo: "@ppocontingencia",
+    photo: "/img/depoimentos/maycon.webp",
     result: "Mais de 2 anos de parceria",
   },
   {
@@ -171,6 +173,7 @@ export const DEPOIMENTOS = [
       "Quero agradecer ao Igor e ao Wilton por todo o apoio, orientação e dedicação ao longo dessa jornada. Com a ajuda de vocês, conseguimos crescer com mais clareza e visão de futuro. Sou muito grata por essa parceria.",
     name: "Lucia Fontenele",
     cargo: "@equiposmedicosfor",
+    photo: "/img/depoimentos/lucia.webp",
     result: "Crescimento com visão de futuro",
   },
 ];
@@ -220,6 +223,16 @@ export function ProvaSection({
               </div>
 
               <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: 20, marginTop: 28, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: 12 }}>
+                {d.photo && (
+                  <img
+                    src={d.photo}
+                    alt={d.name}
+                    loading="lazy"
+                    width="64"
+                    height="64"
+                    style={{ width: 64, height: 64, borderRadius: "50%", border: `2px solid ${C.green}`, objectFit: "cover" }}
+                  />
+                )}
                 <div>
                   <p style={{ fontSize: 14, fontWeight: 700, color: C.text, marginBottom: 4 }}>{d.name}</p>
                   <p style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", margin: 0 }}>{d.cargo}</p>
