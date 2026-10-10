@@ -58,6 +58,35 @@ export function WaButton({ msg, origem, className, children, style }) {
 }
 
 /* ─────────────────────────────────────────
+   BOTÃO FIXO NO CELULAR
+   Aparece depois do topo e some enquanto o formulário está na tela.
+───────────────────────────────────────── */
+export function StickyCTA({ label = "Agendar diagnóstico gratuito" }) {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    let formVisible = false;
+    const upd = () => setShow(window.scrollY > 600 && !formVisible);
+    let io;
+    const el = document.getElementById("diagnostico");
+    if (el && "IntersectionObserver" in window) {
+      io = new IntersectionObserver(([entry]) => { formVisible = entry.isIntersecting; upd(); }, { threshold: 0.05 });
+      io.observe(el);
+    }
+    window.addEventListener("scroll", upd, { passive: true });
+    upd();
+    return () => { window.removeEventListener("scroll", upd); if (io) io.disconnect(); };
+  }, []);
+
+  return (
+    <div className={`sticky-cta${show ? " is-visible" : ""}`} aria-hidden={!show}>
+      <a href="#diagnostico" className="btn btn-primary" tabIndex={show ? 0 : -1}>
+        {label} <ArrowRight size={18} />
+      </a>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────
    NAV
 ───────────────────────────────────────── */
 export function Nav({ links, ctaLabel = "Diagnóstico grátis", homeHref = "/" }) {
@@ -128,6 +157,7 @@ export const DEPOIMENTOS = [
       "A Axi Business tem sido essencial para nosso crescimento. Trouxe organização, clareza nos dados e mais segurança nas decisões. Hoje conseguimos agir com mais precisão e estamos muito satisfeitos com essa parceria.",
     name: "Riany Barcelar",
     cargo: "@hortensia_conceito",
+    photo: "/img/depoimentos/riany.webp",
     result: "Mais clareza e segurança nas decisões",
   },
   {
@@ -135,6 +165,7 @@ export const DEPOIMENTOS = [
       "Após mais de dois anos de parceria, posso afirmar que a Axi é uma das empresas mais importantes da nossa operação. O suporte e a organização que trouxeram foram fundamentais para alcançarmos o nível em que estamos hoje.",
     name: "Maycon I.S.",
     cargo: "@ppocontingencia",
+    photo: "/img/depoimentos/maycon.webp",
     result: "Mais de 2 anos de parceria",
   },
   {
@@ -142,6 +173,7 @@ export const DEPOIMENTOS = [
       "Quero agradecer ao Igor e ao Wilton por todo o apoio, orientação e dedicação ao longo dessa jornada. Com a ajuda de vocês, conseguimos crescer com mais clareza e visão de futuro. Sou muito grata por essa parceria.",
     name: "Lucia Fontenele",
     cargo: "@equiposmedicosfor",
+    photo: "/img/depoimentos/lucia.webp",
     result: "Crescimento com visão de futuro",
   },
 ];
@@ -191,6 +223,16 @@ export function ProvaSection({
               </div>
 
               <div style={{ borderTop: `1px solid ${C.border}`, paddingTop: 20, marginTop: 28, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: 12 }}>
+                {d.photo && (
+                  <img
+                    src={d.photo}
+                    alt={d.name}
+                    loading="lazy"
+                    width="64"
+                    height="64"
+                    style={{ width: 64, height: 64, borderRadius: "50%", border: `2px solid ${C.green}`, objectFit: "cover" }}
+                  />
+                )}
                 <div>
                   <p style={{ fontSize: 14, fontWeight: 700, color: C.text, marginBottom: 4 }}>{d.name}</p>
                   <p style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", margin: 0 }}>{d.cargo}</p>
@@ -359,7 +401,7 @@ export function DiagnosticoSection({
   formHint = "Preenchimento leva menos de 2 minutos.",
   fields,
   hidden = {},
-  subject = "Novo lead - Diagnóstico Axi Business",
+  subject = "Novo lead: Diagnóstico Axi Business",
   origem = "pagina-geral",
   waIntro = "Olá! Vim pelo site da Axi Business e quero agendar meu diagnóstico gratuito.",
 }) {
@@ -614,7 +656,7 @@ export function Footer({ links, waMsg, origem, tagline }) {
         </div>
 
         <div style={{ borderTop: "1px solid rgba(255,255,255,0.05)", paddingTop: 24, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-          <p style={{ color: "rgba(255,255,255,0.2)", fontSize: 13 }}>© {new Date().getFullYear()} Axi Business. Todos os direitos reservados.</p>
+          <p style={{ color: "rgba(255,255,255,0.2)", fontSize: 13 }}>© {new Date().getFullYear()} Axi Business · CNPJ 49.848.449/0001-01. Todos os direitos reservados.</p>
           <a href="/privacidade/" style={{ color: "rgba(255,255,255,0.3)", fontSize: 13, textDecoration: "none" }}>
             Política de Privacidade
           </a>
