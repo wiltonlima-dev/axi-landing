@@ -1,10 +1,10 @@
 import {
-  TrendingUp, AlertTriangle, ArrowRight, BarChart3, Shield, Target, Zap, Phone
+  TrendingUp, AlertTriangle, ArrowRight, BarChart3, Shield, Target, Zap, Phone, Landmark, Store
 } from "lucide-react";
 import { C, IMG, styles } from "./shared/theme.js";
 import {
   useCountdown, WaButton, Nav, ProvaSection, SociosSection, FAQ,
-  DiagnosticoSection, FinalCTA, Footer
+  DiagnosticoSection, FinalCTA, Footer, StickyCTA
 } from "./shared/components.jsx";
 
 /* Página geral — axibusiness.com.br/ */
@@ -147,6 +147,48 @@ function Hero() {
 }
 
 /* ─────────────────────────────────────────
+   MARCAS — empresas onde os sócios atuaram como executivos
+   Para trocar o nome por logo: salve o arquivo em public/img/marcas/
+   (de preferência PNG transparente ou SVG) e preencha "logo" abaixo.
+   Os logos aparecem em branco sobre o fundo escuro.
+───────────────────────────────────────── */
+const MARCAS = [
+  { nome: "XP Investimentos", logo: null },
+  { nome: "Bradesco",         logo: null },
+  { nome: "Apple",            logo: null },
+  { nome: "iByte",            logo: null },
+  { nome: "RioMar Shopping",  logo: null },
+];
+
+function MarcasSection() {
+  const item = (m, i, hidden) => (
+    <div key={`${hidden ? "b" : "a"}-${i}`} className="marquee-item">
+      {m.logo
+        ? <img src={m.logo} alt={hidden ? "" : m.nome} loading="lazy" />
+        : <span className="marquee-name">{m.nome}</span>}
+    </div>
+  );
+  return (
+    <section style={{ background: "#0B150F", color: C.text, padding: "44px 0 48px", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+      <div className="container" style={{ textAlign: "center", marginBottom: 22 }}>
+        <p style={{ fontSize: 11, color: C.green, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 8 }}>
+          Ampla experiência em grandes marcas
+        </p>
+        <p style={{ fontSize: 15, color: "rgba(255,255,255,0.55)" }}>
+          Antes da Axi, os sócios atuaram como executivos em empresas como:
+        </p>
+      </div>
+      <div className="marquee" aria-label="Empresas onde os sócios atuaram">
+        <div className="marquee-track">
+          <div style={{ display: "flex" }}>{MARCAS.map((m, i) => item(m, i, false))}</div>
+          <div style={{ display: "flex" }} aria-hidden="true">{MARCAS.map((m, i) => item(m, i, true))}</div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────
    DOR — light section
 ───────────────────────────────────────── */
 function DorSection() {
@@ -201,7 +243,7 @@ function DorSection() {
 ───────────────────────────────────────── */
 function MetodoSection() {
   const steps = [
-    { num: "01", title: "Diagnóstico Financeiro", desc: "Mapeamos a situação real do seu negócio em 72 horas. Sem eufemismos: você vai enxergar exatamente onde está perdendo dinheiro.", detail: "Análise de DRE, fluxo de caixa, estrutura de custos e margem real por produto ou serviço." },
+    { num: "01", title: "Diagnóstico Financeiro Completo", desc: "Mapeamos a situação real do seu negócio, sem eufemismos: você vai enxergar exatamente onde está perdendo dinheiro.", detail: "Análise de DRE, fluxo de caixa, estrutura de custos e margem real por produto ou serviço." },
     { num: "02", title: "Arquitetura Financeira", desc: "Redesenhamos toda a estrutura: separação de caixas, pró-labore, reservas estratégicas e previsibilidade de 90 dias.", detail: "Dashboard em tempo real para você tomar decisão com dado, não com instinto." },
     { num: "03", title: "Execução e BPO", desc: "Você pode delegar o financeiro operacional para a gente. Contas, relatórios e indicadores: tudo executado e entregue.", detail: "Gestão contínua com reuniões mensais de análise estratégica e alertas proativos." },
     { num: "04", title: "Inteligência de Crescimento", desc: "Com a base financeira estruturada, você começa a tomar decisões de expansão com segurança e número na mão.", detail: "Modelagem de cenários, análise de viabilidade e projeções antes de qualquer movimento." },
@@ -226,7 +268,7 @@ function MetodoSection() {
             <div style={{ background: C.greenFaint, border: `1px solid ${C.border}`, borderRadius: 12, padding: "20px 24px" }}>
               <p style={{ fontSize: 11, color: C.green, fontWeight: 700, marginBottom: 6, letterSpacing: "0.1em", textTransform: "uppercase" }}>Nossa garantia</p>
               <p style={{ fontSize: 15, color: C.text, lineHeight: 1.65 }}>
-                Se após 90 dias você não tiver visibilidade financeira completa do seu negócio, devolvemos seu investimento integralmente.
+                Se em 90 dias você ainda não tiver visibilidade completa do financeiro do seu negócio, seguimos trabalhando com você sem custo adicional até chegar lá.
               </p>
             </div>
           </div>
@@ -274,8 +316,14 @@ function ServicosSection() {
       icon: <BarChart3 size={22} color={C.green} />,
       title: "Consultoria Financeira",
       desc: "Diagnóstico completo mais estruturação financeira para empresas que querem clareza e controle. Ideal para quem está pronto para parar de trabalhar no escuro.",
-      ideal: "Empresas faturando R$30k–500k/mês",
+      ideal: "Empresas de qualquer porte que querem clareza e controle",
       highlight: true,
+    },
+    {
+      icon: <Landmark size={22} color={C.green} />,
+      title: "Captação de Recursos",
+      desc: "Estruturamos o acesso a crédito para investir ou reforçar o caixa, como as linhas do FNE (Banco do Nordeste): análise de elegibilidade, projeto, documentação e acompanhamento até a liberação.",
+      ideal: "Empresas que querem investir, expandir ou reforçar o capital de giro",
     },
     {
       icon: <Target size={22} color={C.green} />,
@@ -294,12 +342,12 @@ function ServicosSection() {
             Escolha o nível de<br />
             <span style={{ color: C.green }}>suporte que você precisa</span>
           </h2>
-          <p style={{ color: C.muted, maxWidth: 480, margin: "0 auto" }}>
-            Nosso diagnóstico inicial é sempre gratuito e define qual caminho faz mais sentido para o seu caso.
+          <p style={{ color: C.muted, maxWidth: 560, margin: "0 auto" }}>
+            Nosso diagnóstico inicial é sempre gratuito e define qual caminho faz mais sentido para o seu caso. O escopo e o investimento se adaptam ao momento de cada empresa.
           </p>
         </div>
 
-        <div className="three-col" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginBottom: 32 }}>
+        <div className="two-col services-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16, marginBottom: 32 }}>
           {services.map((s, i) => (
             <div
               key={i}
@@ -363,38 +411,65 @@ function ServicosSection() {
 }
 
 /* ─────────────────────────────────────────
+   FAIXA PARA LOJAS — leva lojistas para /moda/
+───────────────────────────────────────── */
+function LojasBand() {
+  return (
+    <section style={{ background: C.creamDark, padding: "0 0 72px" }}>
+      <div className="container">
+        <a href="/moda/" className="card card-light lojas-band" style={{ display: "flex", alignItems: "center", gap: 20, padding: "24px 28px", textDecoration: "none", color: C.textDark, flexWrap: "wrap" }}>
+          <div style={{ width: 48, height: 48, borderRadius: 12, background: C.greenLight, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+            <Store size={22} color={C.green} />
+          </div>
+          <div style={{ flex: "1 1 320px" }}>
+            <p style={{ fontSize: 17, fontWeight: 800, letterSpacing: "-0.02em", marginBottom: 4 }}>Tem loja de moda ou varejo?</p>
+            <p style={{ fontSize: 14, color: C.muted, lineHeight: 1.6 }}>
+              Temos um trabalho desenhado para a rotina de loja: taxa da maquininha, estoque por grade, preço por peça e metas da equipe.
+            </p>
+          </div>
+          <span className="btn btn-outline" style={{ flexShrink: 0 }}>
+            Ver a página para lojas <ArrowRight size={16} />
+          </span>
+        </a>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────
    FAQ / FORMULÁRIO — conteúdo da página geral
 ───────────────────────────────────────── */
 const FAQS = [
-  { q: "Minha empresa é pequena. Faz sentido contratar uma consultoria financeira?", a: "Sim — especialmente por isso. Empresas pequenas perdem proporcionalmente mais dinheiro por falta de estrutura financeira do que as grandes. Um erro de precificação ou uma conta ignorada tem impacto direto na sobrevivência do negócio. Atendemos empresas a partir de R$30k/mês de faturamento." },
+  { q: "Minha empresa é pequena. Faz sentido contratar uma consultoria financeira?", a: "Sim — especialmente por isso. Empresas pequenas perdem proporcionalmente mais dinheiro por falta de estrutura financeira do que as grandes. Um erro de precificação ou uma conta ignorada tem impacto direto na sobrevivência do negócio. Atendemos negócios de todos os tamanhos e modelos, e o escopo e o investimento se adaptam à realidade de cada empresa." },
   { q: "Já tenho contador. O que a Axi faz de diferente?", a: "O contador cuida do que passou (fiscal, tributos, obrigações legais). A Axi cuida do que está acontecendo e do que vai acontecer: fluxo de caixa, previsibilidade, margem e decisão estratégica. São funções complementares, não concorrentes." },
   { q: "Quanto tempo leva para ver resultado?", a: "Nossos clientes costumam ter as primeiras percepções em até 30 dias — quando entregamos o diagnóstico completo com os principais pontos de sangria financeira. Mudanças estruturais e aumento de margem costumam aparecer entre 60 e 90 dias de implementação." },
-  { q: "Como funciona o diagnóstico gratuito?", a: "É uma reunião de 45 a 60 minutos com um dos nossos sócios. Sem script de venda. Analisamos os números que você trouxer e você sai com pelo menos 3 insights acionáveis — mesmo que não contrate a gente." },
+  { q: "Como funciona o diagnóstico gratuito?", a: "É uma conversa de 1 hora com um dos nossos sócios. Sem script de venda. Analisamos os números que você trouxer e você sai com pelo menos 3 insights acionáveis — mesmo que não contrate a gente." },
   { q: "E se eu não quiser gerenciar nada disso?", a: "Nosso BPO Financeiro foi feito exatamente para isso. Você delega a operação financeira inteira pra nós. Contas, relatórios, alertas, reuniões mensais — tudo sob nossa responsabilidade. Você só toma a decisão final." },
 ];
 
 const FORM_FIELDS = [
-  { name: "nome", label: "Nome completo *", type: "text", placeholder: "Seu nome", required: true, autoComplete: "name" },
+  { name: "nome", label: "Seu nome *", type: "text", placeholder: "Como podemos te chamar?", required: true, autoComplete: "name" },
   { name: "whatsapp", label: "WhatsApp *", type: "tel", placeholder: "(85) 99999-9999", required: true, autoComplete: "tel" },
-  { name: "email", label: "E-mail *", type: "email", placeholder: "voce@empresa.com", required: true, autoComplete: "email" },
-  { name: "segmento", label: "Segmento da empresa *", type: "text", placeholder: "Ex: clínica...", required: true },
-  { name: "faturamento", label: "Faturamento mensal *", type: "select", required: true, options: ["Até R$50 mil", "R$50k – R$150k", "R$150k – R$500k", "Acima de R$500k"] },
-  { name: "dor_financeira", label: "Principal dor financeira", type: "textarea", placeholder: "Descreva brevemente...", required: false },
+  { name: "empresa", label: "Nome ou @ da empresa", type: "text", placeholder: "@suaempresa", required: false, autoComplete: "organization" },
+  { name: "segmento", label: "Segmento da empresa *", type: "select", required: true, options: ["Varejo e moda", "Comércio e distribuição", "Serviços", "Saúde e clínicas", "Indústria", "Imobiliário e construção", "Negócio digital", "Outro"] },
+  { name: "faturamento", label: "Faturamento mensal *", type: "select", required: true, options: ["Até R$30 mil", "R$30 mil – R$100 mil", "R$100 mil – R$300 mil", "R$300 mil – R$1 milhão", "Acima de R$1 milhão"] },
+  { name: "dor_financeira", label: "O que mais pesa hoje no financeiro?", type: "textarea", placeholder: "Ex: caixa apertado, não sei quanto lucro, sócios desalinhados...", required: false },
 ];
 
 function Diagnostico() {
   const cd = useCountdown();
   return (
     <DiagnosticoSection
-      title={["45 minutos que podem", "mudar o seu negócio."]}
+      title={["1 hora que pode", "mudar o seu negócio."]}
       text="Uma conversa direta com um dos nossos sócios. Sem script de venda. Você traz os números, a gente traz os insights gratuitamente."
       bullets={[
         "Identificação dos principais pontos de perda financeira",
         "Análise da sua estrutura de caixa atual",
-        "3 ações imediatas que você pode implementar sozinho",
+        "3 ações imediatas para colocar em prática já na próxima semana",
         "Proposta personalizada se fizer sentido para os dois lados",
       ]}
       scarcity={<>Apenas <strong style={{ color: C.text }}>3 vagas</strong> este mês. Encerramento em {cd.d}d {cd.h}h {cd.m}m.</>}
+      formHint="Leva menos de 1 minuto."
       fields={FORM_FIELDS}
       origem={ORIGEM}
     />
@@ -410,9 +485,11 @@ export default function App() {
       <style>{styles}</style>
       <Nav links={navLinks} />
       <Hero />
+      <MarcasSection />
       <DorSection />
       <MetodoSection />
       <ServicosSection />
+      <LojasBand />
       <ProvaSection />
       <SociosSection />
       <Diagnostico />
@@ -431,6 +508,7 @@ export default function App() {
         origem={ORIGEM}
         tagline="Consultoria financeira empresarial para quem quer parar de trabalhar no escuro e começar a crescer com inteligência."
       />
+      <StickyCTA />
     </>
   );
 }

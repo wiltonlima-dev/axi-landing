@@ -1,7 +1,7 @@
 import { AlertTriangle, ArrowRight, Phone, Store, Zap } from "lucide-react";
 import { C, styles } from "../shared/theme.js";
 import {
-  WaButton, Nav, ProvaSection, SociosSection, FAQ, DiagnosticoSection, FinalCTA, Footer
+  WaButton, Nav, ProvaSection, SociosSection, FAQ, DiagnosticoSection, FinalCTA, Footer, StickyCTA
 } from "../shared/components.jsx";
 
 /* Página para lojas de moda e varejo — axibusiness.com.br/moda/ */
@@ -300,7 +300,7 @@ function ComoFuncionaSection() {
 ───────────────────────────────────────── */
 const FAQS = [
   { q: "Já uso um sistema na loja. Ainda faz sentido?", a: "Faz. O sistema registra as vendas, mas não diz se a loja está dando lucro. A Axi usa o que o seu sistema já gera e transforma em DRE, preço, metas e decisões. Se a loja ainda não tem sistema, começamos com um controle simples e evoluímos quando for a hora." },
-  { q: "Minha loja é pequena. Vale a pena?", a: "Loja pequena é justamente onde um erro de preço ou de taxa pesa mais no fim do mês. Atendemos lojas a partir de R$30 mil de faturamento mensal." },
+  { q: "Minha loja é pequena. Vale a pena?", a: "Loja pequena é justamente onde um erro de preço ou de taxa pesa mais no fim do mês. A Axi atende lojas de todos os tamanhos, e o escopo e o investimento se adaptam à realidade de cada loja." },
   { q: "Vendo na loja física e pelo Instagram. Vocês organizam os dois?", a: "Sim. As vendas de todos os canais entram no mesmo controle, com as taxas e o frete de cada um, para você ver qual canal realmente dá lucro." },
   { q: "Já tenho contador. O que muda?", a: "O contador cuida do que passou: impostos, folha e obrigações legais. A Axi cuida do que está acontecendo e do que vai acontecer: caixa, margem, preço, estoque e metas. São trabalhos que se completam." },
   { q: "Como funciona o diagnóstico gratuito?", a: "É uma conversa de 1 hora com um dos sócios da Axi. Você traz os números que tiver e sai com pelo menos 3 pontos de ação para a sua loja, mesmo que não contrate a gente." },
@@ -370,6 +370,7 @@ export default function ModaApp() {
         origem={ORIGEM}
         tagline="Organização financeira para lojas de moda e varejo que querem vender com lucro e crescer com número na mão."
       />
+      <StickyCTA />
     </>
   );
 }

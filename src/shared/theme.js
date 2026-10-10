@@ -172,6 +172,25 @@ export const styles = `
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
   }
 
+  /* ── BOTÃO FIXO (só no celular) ── */
+  .sticky-cta { display: none; }
+
+  /* ── FAIXA DE MARCAS ── */
+  .marquee { overflow: hidden; position: relative;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+  .marquee-track { display: flex; width: max-content; animation: marquee 32s linear infinite; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  .marquee-item { flex-shrink: 0; display: flex; align-items: center; justify-content: center; height: 56px; padding: 0 36px; }
+  .marquee-item img { max-height: 34px; max-width: 140px; width: auto; height: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.55; transition: opacity 0.2s; }
+  .marquee-item img:hover { opacity: 0.9; }
+  .marquee-name { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; color: rgba(255,255,255,0.42); white-space: nowrap; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; flex-wrap: wrap; justify-content: center; width: auto; }
+    .marquee-track > [aria-hidden="true"] { display: none; }
+  }
+
   /* ── FOOTER LINKS ── */
   .footer-link { color: rgba(255,255,255,0.4); font-size: 14px; text-decoration: none; transition: color 0.2s; }
   .footer-link:hover { color: ${C.green}; }
@@ -179,6 +198,19 @@ export const styles = `
   @media (max-width: 900px) {
     section { padding: 64px 0; }
     .br-desktop { display: none; }
+    .services-grid { grid-template-columns: 1fr !important; }
+    .sticky-cta {
+      display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 150;
+      padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+      background: rgba(13,17,15,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      transform: translateY(110%); transition: transform 0.3s ease;
+    }
+    .sticky-cta.is-visible { transform: translateY(0); }
+    .sticky-cta .btn { width: 100%; justify-content: center; padding: 15px 20px; font-size: 15px; }
+    footer { padding-bottom: 104px !important; }
+    .marquee-item { padding: 0 24px; }
+    .marquee-name { font-size: 17px; }
     .container { padding: 0 18px; }
     .two-col { grid-template-columns: 1fr !important; gap: 40px !important; }
     .three-col { grid-template-columns: 1fr !important; }

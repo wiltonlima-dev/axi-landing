@@ -58,6 +58,35 @@ export function WaButton({ msg, origem, className, children, style }) {
 }
 
 /* ─────────────────────────────────────────
+   BOTÃO FIXO NO CELULAR
+   Aparece depois do topo e some enquanto o formulário está na tela.
+───────────────────────────────────────── */
+export function StickyCTA({ label = "Agendar diagnóstico gratuito" }) {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    let formVisible = false;
+    const upd = () => setShow(window.scrollY > 600 && !formVisible);
+    let io;
+    const el = document.getElementById("diagnostico");
+    if (el && "IntersectionObserver" in window) {
+      io = new IntersectionObserver(([entry]) => { formVisible = entry.isIntersecting; upd(); }, { threshold: 0.05 });
+      io.observe(el);
+    }
+    window.addEventListener("scroll", upd, { passive: true });
+    upd();
+    return () => { window.removeEventListener("scroll", upd); if (io) io.disconnect(); };
+  }, []);
+
+  return (
+    <div className={`sticky-cta${show ? " is-visible" : ""}`} aria-hidden={!show}>
+      <a href="#diagnostico" className="btn btn-primary" tabIndex={show ? 0 : -1}>
+        {label} <ArrowRight size={18} />
+      </a>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────
    NAV
 ───────────────────────────────────────── */
 export function Nav({ links, ctaLabel = "Diagnóstico grátis", homeHref = "/" }) {
@@ -614,7 +643,7 @@ export function Footer({ links, waMsg, origem, tagline }) {
         </div>
 
         <div style={{ borderTop: "1px solid rgba(255,255,255,0.05)", paddingTop: 24, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-          <p style={{ color: "rgba(255,255,255,0.2)", fontSize: 13 }}>© {new Date().getFullYear()} Axi Business. Todos os direitos reservados.</p>
+          <p style={{ color: "rgba(255,255,255,0.2)", fontSize: 13 }}>© {new Date().getFullYear()} Axi Business · CNPJ 49.848.449/0001-01. Todos os direitos reservados.</p>
           <a href="/privacidade/" style={{ color: "rgba(255,255,255,0.3)", fontSize: 13, textDecoration: "none" }}>
             Política de Privacidade
           </a>
