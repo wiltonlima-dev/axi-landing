@@ -4,7 +4,7 @@ import {
 } from "lucide-react";
 import { C, IMG, styles } from "./shared/theme.js";
 import {
-  useCountdown, WaButton, Nav, ProvaSection, SociosSection, FAQ,
+  useCountdown, WaButton, Nav, MarcasSection, ProvaSection, SociosSection, FAQ,
   DiagnosticoSection, FinalCTA, Footer, StickyCTA
 } from "./shared/components.jsx";
 
@@ -141,50 +141,6 @@ function Hero() {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─────────────────────────────────────────
-   MARCAS — empresas onde os sócios atuaram como executivos
-   Para incluir uma marca: salve o logo em public/img/marcas/ (SVG ou PNG
-   transparente) e adicione uma linha abaixo. "h" é a altura em pixels,
-   para equilibrar logos largos e quadrados. Sem logo, aparece o nome.
-───────────────────────────────────────── */
-const MARCAS = [
-  { nome: "XP Investimentos",   logo: "/img/marcas/xp.svg",                h: 42 },
-  { nome: "BTG Pactual",        logo: "/img/marcas/btg-pactual.svg",       h: 36 },
-  { nome: "Bradesco",           logo: "/img/marcas/bradesco.svg",          h: 30 },
-  { nome: "Banco do Nordeste",  logo: "/img/marcas/banco-do-nordeste.svg", h: 38 },
-  { nome: "Apple",              logo: "/img/marcas/apple.svg",             h: 44 },
-  { nome: "RioMar Shopping",    logo: "/img/marcas/riomar.svg",            h: 44 },
-  { nome: "Pague Menos",        logo: "/img/marcas/pague-menos.svg",       h: 34 },
-];
-
-function MarcasSection() {
-  const item = (m, i, hidden) => (
-    <div key={`${hidden ? "b" : "a"}-${i}`} className="marquee-item">
-      {m.logo
-        ? <img src={m.logo} alt={hidden ? "" : m.nome} loading="lazy" style={{ height: m.h || 36 }} />
-        : <span className="marquee-name">{m.nome}</span>}
-    </div>
-  );
-  return (
-    <section style={{ background: "#fff", color: C.textDark, padding: "44px 0 48px", borderBottom: `1px solid ${C.borderLight}` }}>
-      <div className="container" style={{ textAlign: "center", marginBottom: 22 }}>
-        <p style={{ fontSize: 11, color: C.greenDark, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 8 }}>
-          Ampla experiência em grandes marcas
-        </p>
-        <p style={{ fontSize: 15, color: C.muted }}>
-          Antes da Axi, os sócios atuaram como executivos em empresas como:
-        </p>
-      </div>
-      <div className="marquee" aria-label="Empresas onde os sócios atuaram">
-        <div className="marquee-track">
-          <div style={{ display: "flex" }}>{MARCAS.map((m, i) => item(m, i, false))}</div>
-          <div style={{ display: "flex" }} aria-hidden="true">{MARCAS.map((m, i) => item(m, i, true))}</div>
         </div>
       </div>
     </section>
@@ -483,6 +439,7 @@ function ServicosSection() {
       title: "Captação de Recursos",
       desc: "Estruturamos o acesso a crédito para investir ou reforçar o caixa, como as linhas do FNE (Banco do Nordeste): análise de elegibilidade, projeto, documentação e acompanhamento até a liberação.",
       ideal: "Empresas que querem investir, expandir ou reforçar o capital de giro",
+      link: { href: "/captacao/", label: "Ver como funciona a captação" },
     },
     {
       icon: <Target {...ico} />,
@@ -540,6 +497,11 @@ function ServicosSection() {
                 <p style={{ fontSize: 13, color: C.textDark }}>
                   {s.ideal}
                 </p>
+                {s.link && (
+                  <a href={s.link.href} style={{ display: "inline-flex", alignItems: "center", gap: 6, marginTop: 14, fontSize: 14, fontWeight: 700, color: C.greenDark, textDecoration: "none" }}>
+                    {s.link.label} <ArrowRight size={15} />
+                  </a>
+                )}
               </div>
             </div>
           ))}

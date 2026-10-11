@@ -8,10 +8,11 @@ export default defineConfig({
   plugins: [react()],
   build: {
     rollupOptions: {
-      // Cada página é um HTML próprio: / (geral), /moda/ (lojas) e /privacidade/
+      // Cada página é um HTML próprio: / (geral), /moda/ (lojas), /captacao/ (crédito) e /privacidade/
       input: {
         main: page('./index.html'),
         moda: page('./moda/index.html'),
+        captacao: page('./captacao/index.html'),
         privacidade: page('./privacidade/index.html'),
       },
     },

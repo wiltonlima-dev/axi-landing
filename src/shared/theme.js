@@ -213,7 +213,9 @@ export const styles = `
     .marquee-item img { transform: scale(0.85); }
     .marquee-name { font-size: 17px; }
     .container { padding: 0 18px; }
-    .two-col { grid-template-columns: 1fr !important; gap: 40px !important; }
+    .two-col { grid-template-columns: minmax(0, 1fr) !important; gap: 40px !important; }
+    .two-col > * { min-width: 0; }
+    select.field { max-width: 100%; text-overflow: ellipsis; }
     .three-col { grid-template-columns: 1fr !important; }
     .hide-mobile { display: none !important; }
     .btn-lg { padding: 16px 24px; font-size: 15px; width: 100%; justify-content: center; }
