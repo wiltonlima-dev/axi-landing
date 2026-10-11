@@ -149,6 +149,54 @@ export function Nav({ links, ctaLabel = "Diagnóstico grátis", homeHref = "/" }
 }
 
 /* ─────────────────────────────────────────
+   MARCAS — empresas onde os sócios atuaram como executivos
+   Para incluir uma marca: salve o logo em public/img/marcas/ (SVG ou PNG
+   transparente) e adicione uma linha abaixo. "h" é a altura em pixels,
+   para equilibrar logos largos e quadrados. Sem logo, aparece o nome.
+───────────────────────────────────────── */
+export const MARCAS = [
+  { nome: "XP Investimentos",   logo: "/img/marcas/xp.svg",                h: 42 },
+  { nome: "BTG Pactual",        logo: "/img/marcas/btg-pactual.svg",       h: 36 },
+  { nome: "Bradesco",           logo: "/img/marcas/bradesco.svg",          h: 30 },
+  { nome: "Banco do Nordeste",  logo: "/img/marcas/banco-do-nordeste.svg", h: 38 },
+  { nome: "Apple",              logo: "/img/marcas/apple.svg",             h: 44 },
+  { nome: "RioMar Shopping",    logo: "/img/marcas/riomar.svg",            h: 44 },
+  { nome: "Pague Menos",        logo: "/img/marcas/pague-menos.svg",       h: 34 },
+];
+
+export function MarcasSection({
+  marcas = MARCAS,
+  title = "Ampla experiência em grandes marcas",
+  text = "Antes da Axi, os sócios atuaram como executivos em empresas como:",
+}) {
+  const item = (m, i, hidden) => (
+    <div key={`${hidden ? "b" : "a"}-${i}`} className="marquee-item">
+      {m.logo
+        ? <img src={m.logo} alt={hidden ? "" : m.nome} loading="lazy" style={{ height: m.h || 36 }} />
+        : <span className="marquee-name">{m.nome}</span>}
+    </div>
+  );
+  return (
+    <section style={{ background: "#fff", color: C.textDark, padding: "44px 0 48px", borderBottom: `1px solid ${C.borderLight}` }}>
+      <div className="container" style={{ textAlign: "center", marginBottom: 22 }}>
+        <p style={{ fontSize: 11, color: C.greenDark, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 8 }}>
+          {title}
+        </p>
+        <p style={{ fontSize: 15, color: C.muted }}>
+          {text}
+        </p>
+      </div>
+      <div className="marquee" aria-label="Empresas onde os sócios atuaram">
+        <div className="marquee-track">
+          <div style={{ display: "flex" }}>{marcas.map((m, i) => item(m, i, false))}</div>
+          <div style={{ display: "flex" }} aria-hidden="true">{marcas.map((m, i) => item(m, i, true))}</div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────
    PROVA SOCIAL — dark section
 ───────────────────────────────────────── */
 export const DEPOIMENTOS = [
@@ -397,8 +445,10 @@ export function DiagnosticoSection({
   text,
   bullets,
   scarcity,
+  tag = "Diagnóstico gratuito",
   formTitle = "Agende seu diagnóstico",
   formHint = "Preenchimento leva menos de 2 minutos.",
+  submitLabel = "Quero meu diagnóstico gratuito",
   fields,
   hidden = {},
   subject = "Novo lead: Diagnóstico Axi Business",
@@ -476,7 +526,7 @@ export function DiagnosticoSection({
       <div className="container">
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 80, alignItems: "start" }} className="two-col">
           <div>
-            <span className="tag tag-dark"><Zap size={11} /> Diagnóstico gratuito</span>
+            <span className="tag tag-dark"><Zap size={11} /> {tag}</span>
 
             <h2 style={{ fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 900, letterSpacing: "-0.03em", marginBottom: 20, lineHeight: 1.15 }}>
               {title[0]}<br />
@@ -555,7 +605,7 @@ export function DiagnosticoSection({
                 })}
 
                 <button type="submit" className="btn btn-primary btn-lg" style={{ width: "100%", justifyContent: "center" }} disabled={sending}>
-                  {sending ? "Enviando..." : "Quero meu diagnóstico gratuito"}
+                  {sending ? "Enviando..." : submitLabel}
                 </button>
 
                 {error && (

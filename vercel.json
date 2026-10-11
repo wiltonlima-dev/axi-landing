@@ -1,6 +1,7 @@
 {
   "rewrites": [
     { "source": "/moda", "destination": "/moda/index.html" },
+    { "source": "/captacao", "destination": "/captacao/index.html" },
     { "source": "/privacidade", "destination": "/privacidade/index.html" }
   ]
 }
